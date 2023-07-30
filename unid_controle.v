@@ -34,5 +34,14 @@ module control(
    output wire [2:0] ALUSrcBControl;
    output wire [1:0] SSControl;
    output wire [1:0] LScontrol;
+   output wire reset_out
 );
+
+reg [5:0] state;
+reg [5:0] counter;
+
+always @(posedge clk) begin
+    
+end
+
 endmodule
