@@ -10,7 +10,7 @@ module Unid_Controle (
         input wire NG,
 
         //Código
-        input wire [31:26] CODE,
+        input wire [31:26] OPCODE,
         input wire [15:0] OFFSET,
 
         //Sinais de controle
@@ -41,8 +41,8 @@ module Unid_Controle (
         output reg reset_out
     );
 
-    reg [2:0] contador;
-    reg [1:0] estado;
+    reg [5:0] contador;
+    reg [5:0] estado;
 
     //Estados
     parameter Es_Fetch = 6'b000001;
@@ -132,6 +132,7 @@ module Unid_Controle (
     parameter Op_Jal = 6'b000011;
 
     //Reset
+    parameter Es_Reset = 6'b111111;
 
     initial begin
         reset_out = 1'b1;
@@ -139,7 +140,336 @@ module Unid_Controle (
 
     //Código
     always @(posedge clk) begin
-        
-    end
+        if(reset = 1'b1)begin
+            if(estado != Es_Reset)begin
+                estado = Es_Reset;
 
+                WriteMemControl = 1'b0;
+                IRWriteControl = 1'b0;
+                ShiftRegControl = 3'b000;
+                ALUControl = 3'b000;
+                PcControl = 1'b0;
+                HI_writeControl = 1'b0;
+                LO_writeControl = 1'b0;
+                RegAControl = 1'b0;
+                RegBControl = 1'b0;
+                ALUOutControl = 1'b0;
+                WriteMDRControl = 1'b0;
+                EpcControl = 1'b0;
+                EX_control = 2'b00;
+                PcSourceControl = 2'b00;
+                IorDControl = 3'b000;
+                ShiftAmtControl = 2'b00;
+                ShiftSrcControl = 2'b00;
+                DataSrcControl = 3'b100; ///
+                ALUSrcAControl = 3'b000;
+                ALUSrcBControl = 3'b000;
+                SSControl = 2'b00;
+                LScontrol = 2'b00;
+                reset_out = 1'b0;
+                RegDstControl = 2'b00; ///
+                RegWriteControl = 1'b1; ///
+
+                contador = 6'b000000;
+
+
+            end else begin
+                estado = Es_Fetch;
+
+                WriteMemControl = 1'b0;
+                IRWriteControl = 1'b0;
+                ShiftRegControl = 3'b000;
+                ALUControl = 3'b000;
+                PcControl = 1'b0;
+                HI_writeControl = 1'b0;
+                LO_writeControl = 1'b0;
+                RegAControl = 1'b0;
+                RegBControl = 1'b0;
+                ALUOutControl = 1'b0;
+                WriteMDRControl = 1'b0;
+                EpcControl = 1'b0;
+                EX_control = 1'b0;
+                PcSourceControl = 2'b00;
+                IorDControl = 3'b000;
+                ShiftAmtControl = 2'b00;
+                ShiftSrcControl = 2'b00;
+                DataSrcControl = 3'b000; ///
+                ALUSrcAControl = 3'b000;
+                ALUSrcBControl = 3'b000;
+                SSControl = 2'b00;
+                LScontrol = 2'b00;
+                reset_out = 1'b0;
+                RegDstControl = 2'b00;
+                RegWriteControl = 1'b0; ///
+
+                contador = contador + 1;
+            end
+
+        end else begin
+            case(estado):
+            Es_Fetch: begin
+                if (contador == 6'b000000 || contador == 6'b000001 || contadorr = 6'b000010)begin
+                    estado = Es_Fetch;
+
+                    WriteMemControl = 1'b0; ///
+                    IRWriteControl = 1'b0;
+                    ShiftRegControl = 3'b000;
+                    ALUControl = 3'b001; ///
+                    PcControl = 1'b0;
+                    HI_writeControl = 1'b0;
+                    LO_writeControl = 1'b0;
+                    RegAControl = 1'b0;
+                    RegBControl = 1'b0;
+                    ALUOutControl = 1'b0; 
+                    WriteMDRControl = 1'b0;
+                    EpcControl = 1'b0;
+                    EX_control = 1'b0; ///
+                    PcSourceControl = 2'b01; ///
+                    IorDControl = 3'b000; ///
+                    ShiftAmtControl = 2'b00;
+                    ShiftSrcControl = 2'b00;
+                    DataSrcControl = 3'b100;
+                    ALUSrcAControl = 2'b01; ///
+                    ALUSrcBControl = 3'b010; ///
+                    SSControl = 2'b00;
+                    LScontrol = 2'b00;
+                    reset_out = 1'b0;
+                    RegDstControl = 2'b00;
+                    RegWriteControl = 1'b0;
+
+                    contador = contador + 1;
+
+                end
+                
+                else if (contador == 6'b000011)begin
+                    estado = Es_Fetch;
+
+                    WriteMemControl = 1'b0; 
+                    IRWriteControl = 1'b1; ///
+                    ShiftRegControl = 3'b000;
+                    ALUControl = 3'b001; 
+                    PcControl = 1'b1; ///
+                    HI_writeControl = 1'b0;
+                    LO_writeControl = 1'b0;
+                    RegAControl = 1'b0;
+                    RegBControl = 1'b0;
+                    ALUOutControl = 1'b0; 
+                    WriteMDRControl = 1'b0;
+                    EpcControl = 1'b0;
+                    EX_control = 1'b0;
+                    PcSourceControl = 2'b01; 
+                    IorDControl = 3'b000; 
+                    ShiftAmtControl = 2'b00;
+                    ShiftSrcControl = 2'b00;
+                    DataSrcControl = 3'b100;
+                    ALUSrcAControl = 2'b01; 
+                    ALUSrcBControl = 3'b010; 
+                    SSControl = 2'b00;
+                    LScontrol = 2'b00;
+                    reset_out = 1'b0;
+                    RegDstControl = 2'b00;
+                    RegWriteControl = 1'b0;
+
+                    contador = contador + 1;
+                    
+                end
+
+                else if (contador == 6'b000100) begin
+                    estado = Es_Fetch;
+
+                    WriteMemControl = 1'b0; 
+                    IRWriteControl = 1'b0; ///
+                    ShiftRegControl = 3'b000;
+                    ALUControl = 3'b001; ///
+                    PcControl = 1'b0; ///
+                    HI_writeControl = 1'b0;
+                    LO_writeControl = 1'b0;
+                    RegAControl = 1'b1; ///
+                    RegBControl = 1'b1; ///
+                    ALUOutControl = 1'b1; ///
+                    WriteMDRControl = 1'b0;
+                    EpcControl = 1'b0;
+                    EX_control = 1'b0;
+                    PcSourceControl = 2'b01; 
+                    IorDControl = 3'b000; 
+                    ShiftAmtControl = 2'b00;
+                    ShiftSrcControl = 2'b00;
+                    DataSrcControl = 3'b100;
+                    ALUSrcAControl = 2'b01; ///
+                    ALUSrcBControl = 3'b100; ///
+                    SSControl = 2'b00;
+                    LScontrol = 2'b00;
+                    reset_out = 1'b0;
+                    RegDstControl = 2'b00;
+                    RegWriteControl = 1'b0;
+
+                    contador = contador + 1;
+
+                end
+
+               else if (contador == 6'b000110) begin
+                    case(OPCODE):
+                        R: begin
+                            case (OFFSET[5:0])
+                                add_funct: begin
+                                    state = add_st;
+                                end
+
+                                sub_funct: begin
+                                    state = sub_st;
+                                end
+
+                                and_funct: begin
+                                    state = and_st;
+                                end
+
+                                sll_funct: begin
+                                    state = sll_st;
+                                end
+
+                                slt_funct: begin
+                                    state = slt_st;
+                                end
+
+                                sra_funct: begin
+                                    state = sra_st;
+                                end
+
+                                srl_funct: begin
+                                    state = srl_st;
+                                end
+
+                                sllv_funct: begin
+                                    state = sllv_st;
+                                end
+
+                                srav_funct: begin
+                                    state = srav_st;
+                                end
+
+                                jr_funct: begin
+                                    state = jr_st;
+                                end
+
+                                mfhi_funct: begin
+                                    state = mfhi_st;
+                                end
+
+                                mflo_funct: begin
+                                    state = mflo_st;
+                                end
+
+                                break_funct: begin
+                                    state = break_st;
+                                end
+
+                                rte_funct: begin
+                                    state = rte_st;
+                                end
+
+                            endcase
+                        end
+
+                        reset_op: begin
+                            state = reset_st;
+                        end
+
+                        addi_op: begin
+                            state = addi_st;
+                        end
+
+                        addiu_op: begin
+                            state = addiu_st;
+                        end
+
+                        j_op: begin
+                            state = j_st;
+                        end
+
+                        jal_op: begin
+                            state = jal_st;
+                        end
+
+                        slti_op: begin
+                            state = slti_st;
+                        end
+
+                        beq_op: begin
+                            state = beq_st;
+                        end
+
+                        bne_op: begin
+                            state = bne_st;
+                        end
+
+                        ble_op: begin
+                            state = ble_st;
+                        end
+
+                        bgt_op: begin
+                            state = bgt_st;
+                        end
+
+                        lui_op: begin
+                            state = lui_st;
+                        end
+
+                        lw_op: begin
+                            state = loads_st;
+                        end
+
+                        lh_op: begin
+                            state = loads_st;
+                        end
+
+                        lb_op: begin
+                            state = loads_st;
+                        end
+
+                        sw_op: begin
+                            state = stores_st;
+                        end
+
+                        sh_op: begin
+                            state = stores_st;
+                        end
+
+                        sb_op: begin
+                            state = stores_st;
+                        end
+                
+                endcase
+
+                    estado = Es_Fetch;
+
+                    WriteMemControl = 1'b0; 
+                    IRWriteControl = 1'b0; 
+                    ShiftRegControl = 3'b000;
+                    ALUControl = 3'b000; /// 
+                    PcControl = 1'b0; 
+                    HI_writeControl = 1'b0;
+                    LO_writeControl = 1'b0;
+                    RegAControl = 1'b0; ///
+                    RegBControl = 1'b0; ///
+                    ALUOutControl = 1'b0; ///
+                    WriteMDRControl = 1'b0;
+                    EpcControl = 1'b0;
+                    EX_control = 1'b0;
+                    PcSourceControl = 2'b01; 
+                    IorDControl = 3'b000; 
+                    ShiftAmtControl = 2'b00;
+                    ShiftSrcControl = 2'b00;
+                    DataSrcControl = 3'b100;
+                    ALUSrcAControl = 2'b01; 
+                    ALUSrcBControl = 3'b010; 
+                    SSControl = 2'b00;
+                    LScontrol = 2'b00;
+                    reset_out = 1'b0;
+                    RegDstControl = 2'b00;
+                    RegWriteControl = 1'b0;
+
+                    contador = contador + 1;
+                end
+            endcase
+        end
     endmodule
