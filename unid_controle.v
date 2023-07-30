@@ -161,7 +161,7 @@ module Unid_Controle (
                 output reg [2:0] IorDControl = 3'b000;
                 output reg [1:0] ShiftAmtControl = 2'b00;
                 output reg [1:0] ShiftSrcControl = 2'b00;
-                output reg [2:0] DataSrcControl = 3'b000;
+                output reg [2:0] DataSrcControl = 3'b100;
                 output reg [1:0] ALUSrcAControl = 3'b000;
                 output reg [2:0] ALUSrcBControl = 3'b000;
                 output reg [1:0] SSControl = 2'b00;
@@ -195,7 +195,7 @@ module Unid_Controle (
                 output reg [2:0] IorDControl = 3'b000;
                 output reg [1:0] ShiftAmtControl = 2'b00;
                 output reg [1:0] ShiftSrcControl = 2'b00;
-                output reg [2:0] DataSrcControl = 3'b000;
+                output reg [2:0] DataSrcControl = 3'b100;
                 output reg [1:0] ALUSrcAControl = 3'b000;
                 output reg [2:0] ALUSrcBControl = 3'b000;
                 output reg [1:0] SSControl = 2'b00;
@@ -205,14 +205,45 @@ module Unid_Controle (
                 output reg RegWriteControl = 1'b1;
 
                 contador = contador + 1;
-            end else begin
-                EX_control = 1'b1;
-                PcControl = 1'b1;
-                PcSourceControl = 2'b01;
-            end else begin
-                IRWriteControl = 1'b1;
-                PcControl = 1'b0;
             end
-    end
+        end else begin
+            case(estado):
+            Es_Fetch: begin
+                if (counter != 6'b000011)begin
+                    estado = Es_Fetch;
+
+                    output reg WriteMemControl = 1'b0;
+                    output reg IRWriteControl = 1'b1;
+                    output reg [2:0] ShiftRegControl = 3'b000;
+                    output reg [2:0] ALUControl = 3'b001;
+                    output reg PcControl = 1'b1;
+                    output reg HI_writeControl = 1'b0;
+                    output reg LO_writeControl = 1'b0;
+                    output reg RegAControl = 1'b0;
+                    output reg RegBControl = 1'b0;
+                    output reg ALUOutControl = 1'b1;
+                    output reg WriteMDRControl = 1'b0;
+                    output reg EpcControl = 1'b0;
+                    output reg EX_control = 1'b0;
+                    output reg [1:0] PcSourceControl = 2'b01;
+                    output reg [2:0] IorDControl = 3'b000;
+                    output reg [1:0] ShiftAmtControl = 2'b00;
+                    output reg [1:0] ShiftSrcControl = 2'b00;
+                    output reg [2:0] DataSrcControl = 3'b100;
+                    output reg [1:0] ALUSrcAControl = 2'b01;
+                    output reg [2:0] ALUSrcBControl = 3'b010;
+                    output reg [1:0] SSControl = 2'b00;
+                    output reg [1:0] LScontrol = 2'b00;
+                    output reg reset_out = 1'b0;
+                    output reg [1:0] RegDstControl = 2'b00;
+                    output reg RegWriteControl = 1'b1;
+                end else begin
+                    output reg PcControl = 1'b1;
+                    output reg IRWriteControl = 1'b1;
+
+                end
+            end
+            endcase
+        end
 
     endmodule
