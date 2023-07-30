@@ -349,30 +349,30 @@ module cpu(
         reset,
         OPCODE,
         OFFSET,
-        WriteMemControl
-        IRWriteControl
-        ShiftRegControl
-        RegWriteControl
-        ALUControl
-        PcControl
-        HI_writeControl
-        LO_writeControl
-        RegAControl
-        RegBControl
-        ALUOutControl
-        WriteMDRControl
-        EpcControl
-        EX_control
-        PcSourceControl
-        IorDControl
-        RegDstControl
-        ShiftAmtControl
-        ShiftSrcControl
-        DataSrcControl
-        ALUSrcAControl
-        ALUSrcBControl
-        SSControl
-        LScontrol
+        WriteMemControl,
+        IRWriteControl,
+        ShiftRegControl,
+        RegWriteControl,
+        ALUControl,
+        PcControl,
+        HI_writeControl,
+        LO_writeControl,
+        RegAControl,
+        RegBControl,
+        ALUOutControl,
+        WriteMDRControl,
+        EpcControl,
+        EX_control,
+        PcSourceControl,
+        IorDControl,
+        RegDstControl,
+        ShiftAmtControl,
+        ShiftSrcControl,
+        DataSrcControl,
+        ALUSrcAControl,
+        ALUSrcBControl,
+        SSControl,
+        LScontrol,
         EQ,
         GT,
         Overflow,
