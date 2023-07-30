@@ -41,8 +41,8 @@ module Unid_Controle (
         output reg reset_out
     );
 
-    reg [2:0] contador;
-    reg [1:0] estado;
+    reg [5:0] contador;
+    reg [5:0] estado;
 
     //Estados
     parameter Es_Fetch = 6'b000001;
@@ -132,6 +132,7 @@ module Unid_Controle (
     parameter Op_Jal = 6'b000011;
 
     //Reset
+    parameter Es_Reset = 6'b111111;
 
     initial begin
         reset_out = 1'b1;
@@ -139,7 +140,79 @@ module Unid_Controle (
 
     //Código
     always @(posedge clk) begin
-        
+        if(reset = 1'b1)begin
+            if(estado != Es_Reset)begin
+                estado = Es_Reset;
+
+                output reg WriteMemControl = 1'b0;
+                output reg IRWriteControl = 1'b0;
+                output reg [2:0] ShiftRegControl = 3'b000;
+                output reg [2:0] ALUControl = 3'b000;
+                output reg PcControl = 1'b0;
+                output reg HI_writeControl = 1'b0;
+                output reg LO_writeControl = 1'b0;
+                output reg RegAControl = 1'b0;
+                output reg RegBControl = 1'b0;
+                output reg ALUOutControl = 1'b0;
+                output reg WriteMDRControl = 1'b0;
+                output reg EpcControl = 1'b0;
+                output reg [1:0] EX_control = 2'b00;
+                output reg [1:0] PcSourceControl = 2'b00;
+                output reg [2:0] IorDControl = 3'b000;
+                output reg [1:0] ShiftAmtControl = 2'b00;
+                output reg [1:0] ShiftSrcControl = 2'b00;
+                output reg [2:0] DataSrcControl = 3'b000;
+                output reg [1:0] ALUSrcAControl = 3'b000;
+                output reg [2:0] ALUSrcBControl = 3'b000;
+                output reg [1:0] SSControl = 2'b00;
+                output reg [1:0] LScontrol = 2'b00;
+                output reg reset_out = 1'b0;
+                output reg [1:0] RegDstControl = 2'b00;
+                output reg RegWriteControl = 1'b1;
+
+                contador = 6'b000000;
+
+
+
+            end else begin
+                estado = Es_Fetch;
+
+
+                output reg WriteMemControl = 1'b0;
+                output reg IRWriteControl = 1'b0;
+                output reg [2:0] ShiftRegControl = 3'b000;
+                output reg [2:0] ALUControl = 3'b000;
+                output reg PcControl = 1'b0;
+                output reg HI_writeControl = 1'b0;
+                output reg LO_writeControl = 1'b0;
+                output reg RegAControl = 1'b0;
+                output reg RegBControl = 1'b0;
+                output reg ALUOutControl = 1'b0;
+                output reg WriteMDRControl = 1'b0;
+                output reg EpcControl = 1'b0;
+                output reg EX_control = 1'b0;
+                output reg [1:0] PcSourceControl = 2'b00;
+                output reg [2:0] IorDControl = 3'b000;
+                output reg [1:0] ShiftAmtControl = 2'b00;
+                output reg [1:0] ShiftSrcControl = 2'b00;
+                output reg [2:0] DataSrcControl = 3'b000;
+                output reg [1:0] ALUSrcAControl = 3'b000;
+                output reg [2:0] ALUSrcBControl = 3'b000;
+                output reg [1:0] SSControl = 2'b00;
+                output reg [1:0] LScontrol = 2'b00;
+                output reg reset_out = 1'b0;
+                output reg [1:0] RegDstControl = 2'b00;
+                output reg RegWriteControl = 1'b1;
+
+                contador = contador + 1;
+            end else begin
+                EX_control = 1'b1;
+                PcControl = 1'b1;
+                PcSourceControl = 2'b01;
+            end else begin
+                IRWriteControl = 1'b1;
+                PcControl = 1'b0;
+            end
     end
 
     endmodule
