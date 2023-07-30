@@ -213,7 +213,7 @@ module Unid_Controle (
                     estado = Es_Fetch;
 
                     WriteMemControl = 1'b0;
-                    IRWriteControl = 1'b1;
+                    IRWriteControl = 1'b0;
                     ShiftRegControl = 3'b000;
                     ALUControl = 3'b001;
                     PcControl = 1'b1;
@@ -237,12 +237,19 @@ module Unid_Controle (
                     reset_out = 1'b0;
                     RegDstControl = 2'b00;
                     RegWriteControl = 1'b1;
+
+                    contador = contador + 1;
                 end else begin
                     PcControl = 1'b1;
                     IRWriteControl = 1'b1;
+                    contador = 6'b000000;
+                    estado = Es_Decode;
 
                 end
             end
+        Es_Decode: begin
+            
+        end
             endcase
         end
 
