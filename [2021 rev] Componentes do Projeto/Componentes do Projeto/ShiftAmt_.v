@@ -3,7 +3,7 @@ module ShiftAmt_(
     input wire [15:0] OFFSET
     input wire [31:0] ConstDezesseis, 
     input wire [31:0] RegB_out
-    output reg [31:0] ShiftAmt_out
+    output reg [4:0] ShiftAmt_out
 );
 
 endmodule
