@@ -35,7 +35,7 @@ module Unid_Controle (
         output reg [1:0] ShiftSrcControl,
         output reg [2:0] DataSrcControl,
         output reg [1:0] ALUSrcAControl,
-        output reg [2:0] ALUSrcBControl,
+        output reg [1:0] ALUSrcBControl,
         output reg [1:0] SSControl,
         output reg [1:0] LScontrol,
         output reg reset_out
@@ -162,8 +162,8 @@ module Unid_Controle (
                 ShiftAmtControl = 2'b00;
                 ShiftSrcControl = 2'b00;
                 DataSrcControl = 3'b100; ///
-                ALUSrcAControl = 3'b000;
-                ALUSrcBControl = 3'b000;
+                ALUSrcAControl = 2'b00;
+                ALUSrcBControl = 2'b00;
                 SSControl = 2'b00;
                 LScontrol = 2'b00;
                 reset_out = 1'b1; ///
@@ -194,8 +194,8 @@ module Unid_Controle (
                 ShiftAmtControl = 2'b00;
                 ShiftSrcControl = 2'b00;
                 DataSrcControl = 3'b000; ///
-                ALUSrcAControl = 3'b000;
-                ALUSrcBControl = 3'b000;
+                ALUSrcAControl = 2'b00;
+                ALUSrcBControl = 2'b00;
                 SSControl = 2'b00;
                 LScontrol = 2'b00;
                 reset_out = 1'b0; ///
@@ -230,7 +230,7 @@ module Unid_Controle (
                         ShiftSrcControl = 2'b00;
                         DataSrcControl = 3'b100;
                         ALUSrcAControl = 2'b01; ///
-                        ALUSrcBControl = 3'b010; ///
+                        ALUSrcBControl = 3'b01; ///
                         SSControl = 2'b00;
                         LScontrol = 2'b00;
                         reset_out = 1'b0;
@@ -261,7 +261,7 @@ module Unid_Controle (
                         RegBControl = 1'b1; 
                         ALUOutControl = 1'b1; 
                         ALUSrcAControl = 2'b01; 
-                        ALUSrcBControl = 3'b100; 
+                        ALUSrcBControl = 3'b11; 
 
                         contador = contador + 1;
 
@@ -435,7 +435,7 @@ module Unid_Controle (
                         ShiftSrcControl = 2'b00;
                         DataSrcControl = 3'b000;
                         ALUSrcAControl = 2'b00; 
-                        ALUSrcBControl = 3'b000; 
+                        ALUSrcBControl = 2'b00; 
                         SSControl = 2'b00;
                         LScontrol = 2'b00;
                         reset_out = 1'b0;
@@ -444,6 +444,29 @@ module Unid_Controle (
 
                         contador = 6'b000000;
                     end
+                end
+
+                Es_Break: begin
+                    if (contador == 6'b000000) begin
+                        estado = Es_Break;
+
+                        ALUControl = 3'b010;  
+                        EX_control = 1'b0; 
+                        PcSourceControl = 2'b01; 
+                        ALUSrcAControl = 2'b01; 
+                        ALUSrcBControl = 2'b01; 
+
+                        contador = contador + 1;
+                    end
+
+                    else begin
+                        estado = Es_Comum;
+
+                        PcControl = 1'b1;
+
+                        contador = 6'b000000;
+                    end
+
                 end
             endcase
         end
