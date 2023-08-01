@@ -308,7 +308,7 @@ module Unid_Controle (
                     end
 
                     else if (contador == 6'b000110) begin
-                        case(OFFSET):
+                        case(OPCODE):
                             R: begin
                                 case (OFFSET[5:0]):
                                     add_funct: begin
@@ -440,35 +440,35 @@ module Unid_Controle (
                     
                         endcase
 
-                            estado = Es_Fetch;
+                        estado = Es_Fetch;
 
-                            WriteMemControl = 1'b0; 
-                            IRWriteControl = 1'b0; 
-                            ShiftRegControl = 3'b000;
-                            ALUControl = 3'b000; /// 
-                            PcControl = 1'b0; 
-                            HI_writeControl = 1'b0;
-                            LO_writeControl = 1'b0;
-                            RegAControl = 1'b0; ///
-                            RegBControl = 1'b0; ///
-                            ALUOutControl = 1'b0; ///
-                            WriteMDRControl = 1'b0;
-                            EpcControl = 1'b0;
-                            EX_control = 1'b0;
-                            PcSourceControl = 2'b01; 
-                            IorDControl = 3'b000; 
-                            ShiftAmtControl = 2'b00;
-                            ShiftSrcControl = 2'b00;
-                            DataSrcControl = 3'b100;
-                            ALUSrcAControl = 2'b01; 
-                            ALUSrcBControl = 3'b010; 
-                            SSControl = 2'b00;
-                            LScontrol = 2'b00;
-                            reset_out = 1'b0;
-                            RegDstControl = 2'b00;
-                            RegWriteControl = 1'b0;
+                        WriteMemControl = 1'b0; 
+                        IRWriteControl = 1'b0; 
+                        ShiftRegControl = 3'b000;
+                        ALUControl = 3'b000; /// 
+                        PcControl = 1'b0; 
+                        HI_writeControl = 1'b0;
+                        LO_writeControl = 1'b0;
+                        RegAControl = 1'b0; ///
+                        RegBControl = 1'b0; ///
+                        ALUOutControl = 1'b0; ///
+                        WriteMDRControl = 1'b0;
+                        EpcControl = 1'b0;
+                        EX_control = 1'b0;
+                        PcSourceControl = 2'b01; 
+                        IorDControl = 3'b000; 
+                        ShiftAmtControl = 2'b00;
+                        ShiftSrcControl = 2'b00;
+                        DataSrcControl = 3'b100;
+                        ALUSrcAControl = 2'b01; 
+                        ALUSrcBControl = 3'b010; 
+                        SSControl = 2'b00;
+                        LScontrol = 2'b00;
+                        reset_out = 1'b0;
+                        RegDstControl = 2'b00;
+                        RegWriteControl = 1'b0;
 
-                            contador = contador + 1;
+                        contador = contador + 1;
                     end
                 end
             endcase

@@ -35,7 +35,7 @@ module cpu(
     wire [1:0] ShiftSrcControl;
     wire [2:0] DataSrcControl;
     wire [1:0] ALUSrcAControl;
-    wire [2:0] ALUSrcBControl;
+    wire [1:0] ALUSrcBControl;
     wire [1:0] SSControl;
     wire [1:0] LScontrol;
 
@@ -132,13 +132,13 @@ module cpu(
     );
 
     ula32 ALU_(
-        ALUControl,
         ALUSrcA_out,
         ALUSrcB_out,
+        ALUControl,
         ALUresult,
 
         Overflow,
-        Neg,
+        N,
         Zero,
         EQ,
         GT,
@@ -277,7 +277,7 @@ module cpu(
         DataSrc_out
     );
 
-    ulasrcA ALUSrcA_(
+    ALUSrcA ALUSrcA_(
         ALUSrcAControl,
         ALUOut_out,
         PC_out,
@@ -286,7 +286,7 @@ module cpu(
         ALUSrcA_out
     );
 
-    ulasrcB ALUSrcB_(
+    ALUSrcB ALUSrcB_(
         ALUSrcBControl,
         SE16_32_out,
         ConstQuatro,
