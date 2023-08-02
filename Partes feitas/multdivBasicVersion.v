@@ -96,13 +96,8 @@ module  Multdiv(
                             end
                         end
                     end
-                    default: begin //Zerando os registradores de output no final
-                        Hi <= 32'b0;
-                        Lo <= 32'b0;
-                    end
                 endcase
             end
         endcase
     end
-endmodule
-                    
+endmodule                    
