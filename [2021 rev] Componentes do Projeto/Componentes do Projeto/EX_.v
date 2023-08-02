@@ -5,7 +5,7 @@ module EX_(
     output reg [31:0] EX_out   /* Saída selecionada pelo multiplexador */
 );
   
-always @(*) begin
+always @(PCSource_out or Mem_out ) begin
     case (EX_control) 
          /* Verifica o valor do seletor */
 	1'b0: EX_out = PCSource_out
