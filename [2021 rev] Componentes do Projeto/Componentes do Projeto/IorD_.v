@@ -12,7 +12,7 @@ module  IorD_(
     
 
 
-    always @(*)begin
+	always @(PC_out or ConstDiv0 or ConstOverflow or ConstNo_Opcode or ALUresult or RegA_out or RegB_out )begin
         case(IorDControl)
             3'b000 : IorD_output =  PC_out;
             3'b001 : IorD_output = ConstDiv0;
