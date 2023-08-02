@@ -6,7 +6,7 @@ module PcSource_   (
 	input wire [31:0]  EPC_out, /* EPC */ 
 	output reg [31:0] PCSource_out
 );
-always @(*) begin
+always @(ALUresult or conc_SL26_PC_out or ALUOut_out or EPC_out  ) begin
     case (PcSourceControl)          
         2'b00: PCSource_out = ALUresult; 
         2'b01: PCSource_out = conc_SL26_PC_out; 

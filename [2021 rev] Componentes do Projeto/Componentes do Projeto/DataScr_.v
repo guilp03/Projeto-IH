@@ -10,7 +10,7 @@ module DataSrc_(
     output reg [31:0] DataSrc_out  
 );
   
-always @(*) begin
+	always @(LS_out or HI_out or LO_out or ShiftReg_out or ConstDuzentos_vinte_sete or SE1_32_out or ALUOut_out) begin
     case (inputControl)          
         3'b000: DataSrc_out   = LS_out; 
         3'b001: DataSrc_out  = HI_out; 
