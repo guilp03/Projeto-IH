@@ -455,6 +455,7 @@ module Unid_Controle (
                         PcSourceControl = 2'b01; 
                         ALUSrcAControl = 2'b01; 
                         ALUSrcBControl = 2'b01; 
+                        PcControl = 1'b1;
 
                         contador = contador + 1;
                     end
@@ -462,11 +463,30 @@ module Unid_Controle (
                     else begin
                         estado = Es_Comum;
 
-                        PcControl = 1'b1;
+                        PcControl = 1'b0;
 
                         contador = 6'b000000;
                     end
+                end
 
+                Es_Rte: begin
+                    if (contador == 6'b000000) begin
+                        estado = Es_Rte;
+
+                        PcSourceControl = 2'b11;
+                        EX_control = 1'b0
+                        PcControl = 1'b1
+
+                        contador = contador + 1
+                    end    
+
+                    else begin
+                        estado = Es_Comum;
+
+                        PcControl = 1'b0;
+
+                        contador = 6'b000000;
+                    end
                 end
             endcase
         end
