@@ -6,7 +6,7 @@ module DataSrc_(
     input wire [31:0] ShiftReg_out, 
     input wire [31:0] ConstDuzentos_vinte_sete,
     input wire [31:0] SE1_32_out, 
-    input wire [31:0] ALUOut_out_out, 
+    input wire [31:0] ALUOut_out, 
     output reg [31:0] DataSrc_out  
 );
   

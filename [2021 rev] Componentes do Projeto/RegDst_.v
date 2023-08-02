@@ -4,7 +4,7 @@ module  RegDst_(
     input wire [20:16] RT,
     input wire [31:0] ConstTrinta_um,
     input wire [15:0] OFFSET,
-    output reg [31:0] RegDst_out
+    output reg [4:0] RegDst_out
 );
     
 
