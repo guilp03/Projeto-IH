@@ -628,6 +628,196 @@ module Unid_Controle (
                         endcase
                     end
                 end
+                Es_Lb, Es_Lh, Es_Lw:begin
+                    if (contador == 6'b000000) begin
+                        WriteMemControl = 1'b0;
+                        IRWriteControl = 1'b0;
+                        ShiftRegControl = 3'b000;
+                        ALUControl = 3'b001; //
+                        PcControl = 1'b0;
+                        HI_writeControl = 1'b0;
+                        LO_writeControl = 1'b0;
+                        RegAControl = 1'b0; //
+                        RegBControl = 1'b0; //
+                        ALUOutControl = 1'b1; //
+                        WriteMDRControl = 1'b0;
+                        EpcControl = 1'b0;
+                        EX_control = 1'b0;
+                        PcSourceControl = 2'b01;
+                        IorDControl = 3'b000;
+                        ShiftAmtControl = 2'b00;
+                        ShiftSrcControl = 2'b00;
+                        DataSrcControl = 3'b100;
+                        ALUSrcAControl = 2'b10; //
+                        ALUSrcBControl = 3'b011; //
+                        SSControl = 2'b00;
+                        LScontrol = 2'b00;
+                        reset_out = 1'b0;
+                        RegDstControl = 2'b00;
+                        RegWriteControl = 1'b0;
+
+                        contador = contador + 1;
+                    end
+                    else if( contador == 6'b000001 | contador == 6'b000010 | contador = 6'000011) begin
+                        WriteMemControl = 1'b0; //
+                        IRWriteControl = 1'b0;
+                        ShiftRegControl = 3'b000;
+                        ALUControl = 3'b001;
+                        PcControl = 1'b0;
+                        HI_writeControl = 1'b0;
+                        LO_writeControl = 1'b0;
+                        RegAControl = 1'b0;
+                        RegBControl = 1'b0;
+                        ALUOutControl = 1'b0; //
+                        WriteMDRControl = 1'b0;
+                        EpcControl = 1'b0;
+                        EX_control = 1'b0;
+                        PcSourceControl = 2'b01;
+                        IorDControl = 3'b110; //
+                        ShiftAmtControl = 2'b00;
+                        ShiftSrcControl = 2'b00;
+                        DataSrcControl = 3'b100;
+                        ALUSrcAControl = 2'b10;
+                        ALUSrcBControl = 3'b011;
+                        SSControl = 2'b00;
+                        LScontrol = 2'b00;
+                        reset_out = 1'b0;
+                        RegDstControl = 2'b00;
+                        RegWriteControl = 1'b0;
+
+                        contador = contador + 1;
+                    end
+                    else if (contador == 6'b000100)begin
+                        case(estado)
+                        Es_lw:begin
+                            estado = Es_Comum;
+
+                            WriteMemControl = 1'b0;
+                            IRWriteControl = 1'b0;
+                            ShiftRegControl = 3'b000;
+                            ALUControl = 3'b001;
+                            PcControl = 1'b0;
+                            HI_writeControl = 1'b0;
+                            LO_writeControl = 1'b0;
+                            RegAControl = 1'b0;
+                            RegBControl = 1'b0;
+                            ALUOutControl = 1'b0;
+                            WriteMDRControl = 1'b0;
+                            EpcControl = 1'b0;
+                            EX_control = 1'b0;
+                            PcSourceControl = 2'b01;
+                            IorDControl = 3'b110;
+                            ShiftAmtControl = 2'b00;
+                            ShiftSrcControl = 2'b00;
+                            DataSrcControl = 3'b111; //
+                            ALUSrcAControl = 2'b10;
+                            ALUSrcBControl = 3'b011;
+                            SSControl = 2'b00;
+                            LScontrol = 2'b01; //
+                            reset_out = 1'b0;
+                            RegDstControl = 2'b11; //
+                            RegWriteControl = 1'b1; //
+
+                            contador = 6'b000000;
+                        end
+                        Es_Lb:begin
+                            estado = Es_Comum;
+
+                            WriteMemControl = 1'b0;
+                            IRWriteControl = 1'b0;
+                            ShiftRegControl = 3'b000;
+                            ALUControl = 3'b001;
+                            PcControl = 1'b0;
+                            HI_writeControl = 1'b0;
+                            LO_writeControl = 1'b0;
+                            RegAControl = 1'b0;
+                            RegBControl = 1'b0;
+                            ALUOutControl = 1'b0;
+                            WriteMDRControl = 1'b0;
+                            EpcControl = 1'b0;
+                            EX_control = 1'b0;
+                            PcSourceControl = 2'b01;
+                            IorDControl = 3'b110;
+                            ShiftAmtControl = 2'b00;
+                            ShiftSrcControl = 2'b00;
+                            DataSrcControl = 3'b111; //
+                            ALUSrcAControl = 2'b10;
+                            ALUSrcBControl = 3'b011;
+                            SSControl = 2'b00;
+                            LScontrol = 2'b10; //
+                            reset_out = 1'b0;
+                            RegDstControl = 2'b11; //
+                            RegWriteControl = 1'b1; //
+
+                            contador = 6'b000000;
+                        end
+                        Es_Lh:begin
+                            estado = Es_Comum;
+
+                            WriteMemControl = 1'b0;
+                            IRWriteControl = 1'b0;
+                            ShiftRegControl = 3'b000;
+                            ALUControl = 3'b001;
+                            PcControl = 1'b0;
+                            HI_writeControl = 1'b0;
+                            LO_writeControl = 1'b0;
+                            RegAControl = 1'b0;
+                            RegBControl = 1'b0;
+                            ALUOutControl = 1'b0;
+                            WriteMDRControl = 1'b0;
+                            EpcControl = 1'b0;
+                            EX_control = 1'b0;
+                            PcSourceControl = 2'b01;
+                            IorDControl = 3'b110;
+                            ShiftAmtControl = 2'b00;
+                            ShiftSrcControl = 2'b00;
+                            DataSrcControl = 3'b111; //
+                            ALUSrcAControl = 2'b10;
+                            ALUSrcBControl = 3'b011;
+                            SSControl = 2'b00;
+                            LScontrol = 2'b11; //
+                            reset_out = 1'b0;
+                            RegDstControl = 2'b11; //
+                            RegWriteControl = 1'b1; //
+
+                            contador = 6'b000000;
+                        end
+                        endcase
+                        Es_Lui:begin
+                            if(contador == 6'b000000)begin
+                            estado = Es_Comum;
+
+                            WriteMemControl = 1'b0; 
+                            IRWriteControl = 1'b0; 
+                            ShiftRegControl = 3'b000;
+                            ALUControl = 3'b000;
+                            PcControl = 1'b0; 
+                            HI_writeControl = 1'b0;
+                            LO_writeControl = 1'b0;
+                            RegAControl = 1'b0;
+                            RegBControl = 1'b0;
+                            ALUOutControl = 1'b0;
+                            WriteMDRControl = 1'b0;
+                            EpcControl = 1'b0;
+                            EX_control = 1'b0;
+                            PcSourceControl = 2'b01; 
+                            IorDControl = 3'b000; 
+                            ShiftAmtControl = 2'b00;
+                            ShiftSrcControl = 2'b00;
+                            DataSrcControl = 3'b101; //
+                            ALUSrcAControl = 2'b00; 
+                            ALUSrcBControl = 2'b00; 
+                            SSControl = 2'b00;
+                            LScontrol = 2'b00;
+                            reset_out = 1'b0;
+                            RegDstControl = 2'b01; //
+                            RegWriteControl = 1'b1; //
+
+                            contador = 6'b000000;
+                            end
+                        end
+                    end
+                end
             endcase
         end
     end
