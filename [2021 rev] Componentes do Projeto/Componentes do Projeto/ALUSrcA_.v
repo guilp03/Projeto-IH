@@ -7,7 +7,7 @@ module ALUSrcA_(
     output reg [31:0] ALUSrcA_out   /* Saída selecionada pelo multiplexador */
 );
   
-always @(*) begin
+always @(ALUOut_out or PC_out or RegA_out or MDR_out) begin
     case (ALUSrcAControl) 
          /* Verifica o valor do seletor */
 	    2'b00: ALUSrcA_out = ALUOut_out
