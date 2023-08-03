@@ -455,6 +455,7 @@ module Unid_Controle (
                         PcSourceControl = 2'b01; 
                         ALUSrcAControl = 2'b01; 
                         ALUSrcBControl = 2'b01; 
+                        PcControl = 1'b1;
 
                         contador = contador + 1;
                     end
@@ -462,11 +463,146 @@ module Unid_Controle (
                     else begin
                         estado = Es_Comum;
 
-                        PcControl = 1'b1;
+                        PcControl = 1'b0;
 
                         contador = 6'b000000;
                     end
+                end
 
+                Es_Rte: begin
+                    if (contador == 6'b000000) begin
+                        estado = Es_Rte;
+
+                        PcSourceControl = 2'b11;
+                        EX_control = 1'b0
+                        PcControl = 1'b1
+
+                        contador = contador + 1
+                    end    
+
+                    else begin
+                        estado = Es_Comum;
+
+                        PcControl = 1'b0;
+
+                        contador = 6'b000000;
+                    end
+                end
+                Es_Sw, Es_Sh, Es_Sb: begin
+                    if(contador == 6'b000000) begin
+
+                        ALUControl = 3'b001; //
+                        RegAControl = 1'b0; //
+                        RegBControl = 1'b0; //
+                        ALUOutControl = 1'b1; //
+                        ALUSrcAControl = 2'b10; //
+                        ALUSrcBControl = 3'b001; //
+                        
+                        contador = contador + 1
+                    end 
+                    else if (contador == 6'b000001 | contador == 6'b000010 |contador == 6'b000011)begin
+                        WriteMemControl = 1'b0; //
+                        ALUOutControl = 1'b0; //
+                        IorDControl = 3'b110; //
+
+                        contador = contador + 1;
+                        end
+                    else if (contador == 6'b000100)begin
+                        case(estado):
+                        Es_Sw:begin
+
+                        estado = Es_Comum;
+
+                        WriteMemControl = 1'b1; //
+                        SSControl = 2'b01; //
+
+                        contador = 6'b000000;
+                        end
+
+                        Es_Sh:begin
+                            estado = Es_Comum;
+
+                            WriteMemControl = 1'b1; //
+                            SSControl = 2'b11; //
+
+                            contador = 6'b000000;
+                        end
+
+                        Es_Sb:begin
+                            estado = Es_Comum;
+
+                            WriteMemControl = 1'b1; //
+                            SSControl = 2'b10; //
+
+                            contador = 6'b000000;
+                        end
+                        endcase
+                    end
+                end
+                Es_Lb, Es_Lh, Es_Lw:begin
+                    if (contador == 6'b000000) begin
+
+                        ALUControl = 3'b001; //
+                        RegAControl = 1'b0; //
+                        RegBControl = 1'b0; //
+                        ALUOutControl = 1'b1; //
+                        ALUSrcAControl = 2'b10; //
+                        ALUSrcBControl = 3'b011; //
+
+                        contador = contador + 1;
+                    end
+                    else if( contador == 6'b000001 | contador == 6'b000010 | contador = 6'000011) begin
+                        WriteMemControl = 1'b0; //
+                        ALUOutControl = 1'b0; //
+                        IorDControl = 3'b110; //
+
+                        contador = contador + 1;
+                    end
+                    else if (contador == 6'b000100)begin
+                        case(estado)
+                        Es_lw:begin
+                            estado = Es_Comum;
+
+                            DataSrcControl = 3'b111; //
+                            LScontrol = 2'b01; //
+                            RegDstControl = 2'b11; //
+                            RegWriteControl = 1'b1; //
+
+                            contador = 6'b000000;
+                        end
+                        Es_Lb:begin
+                            estado = Es_Comum;
+
+                            DataSrcControl = 3'b111; //
+                            LScontrol = 2'b10; //
+                            RegDstControl = 2'b11; //
+                            RegWriteControl = 1'b1; //
+
+                            contador = 6'b000000;
+                        end
+                        Es_Lh:begin
+                            estado = Es_Comum;
+
+                            DataSrcControl = 3'b111; //
+                            LScontrol = 2'b11; //
+                            RegDstControl = 2'b11; //
+                            RegWriteControl = 1'b1; //
+
+                            contador = 6'b000000;
+                        end
+                        endcase
+                        Es_Lui:begin
+                            if(contador == 6'b000000)begin
+                            estado = Es_Comum;
+
+                            DataSrcControl = 3'b101; //
+                            RegDstControl = 2'b01; //
+                            RegWriteControl = 1'b1; //
+
+                            contador = 6'b000000;
+                            end
+                        end
+                    end
                 end
             endcase
         end
