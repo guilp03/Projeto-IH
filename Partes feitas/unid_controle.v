@@ -549,7 +549,7 @@ module Unid_Controle (
                     end
 
                     if (contador == 6'b000010) begin
-                        estado = Es_Sub;
+                        estado = Es_Comum;
 
                         RegWriteControl = 1'b0;
 
