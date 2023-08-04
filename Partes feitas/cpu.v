@@ -164,7 +164,7 @@ module cpu(
     Registrador HI(
         clock,
         reset,
-        HI_writeControl,
+        HI_Control,
         MDR_out,
         HI_out
     );
@@ -172,7 +172,7 @@ module cpu(
     Registrador LO(
         clock,
         reset,
-        LO_writeControl,
+        LO_Control,
         MDR_out,
         LO_out
     );
@@ -301,6 +301,20 @@ module cpu(
         RegB_out,
         SL2_out,
         ALUSrcB_out
+    );
+
+    MDSrcA MDSrcA_(
+        MDSrcAControl,
+        RegA_out,
+        MDR_out,
+        MDSrcA_out
+    );
+
+    MDSrcB MDSrcB_(
+        MDSrcBControl,
+        RegB_out,
+        Mem_out,
+        MDSrcB_out
     );
 
     // Componentes    
