@@ -88,13 +88,6 @@ module cpu(
     wire [31:0] ALUSrcB_out;
     wire [31:0] SS_out;
     wire [31:0] LS_out;
-    wire [31:0] ;
-    wire [31:0] ;
-    wire [31:0] ;
-    wire [31:0] ;
-    wire [31:0] ;
-    wire [31:0] ;
-    wire [31:0] ;
 
     // Padrão: Sinal -> Dados_in -> Dados_out
     // Componentes dados
@@ -278,7 +271,7 @@ module cpu(
         LS_out,
         HI_out,
         LO_out,
-        ShiftReg_out
+        ShiftReg_out,
         ConstDuzentos_vinte_sete,
         SE1_32_out,
         ALUOut_out_out,
