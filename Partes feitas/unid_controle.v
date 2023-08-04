@@ -446,6 +446,82 @@ module Unid_Controle (
                     end
                 end
 
+                Es_Add: begin
+                    if (contador == 6'b000000) begin
+                        estado = Es_Add;
+
+                        ALUControl = 3'b001;  
+                        ALUSrcAControl = 2'b10; 
+                        ALUSrcBControl = 2'b10; 
+                        ALUOutControl = 1'b1;
+
+                        contador = contador + 1;
+
+                        if (Overflow == 1'b1) begin
+                            estado = Es_Overflow;
+
+                            contador = 6'b000000;
+                        end
+                    end
+
+                    else if (contador == 6'b000001) begin
+                        estado = Es_Add;
+
+                        ALUOutControl = 1'b0;
+                        RegDstControl = 2'b11;
+                        DataSrcControl = 3'b100;
+                        RegWriteControl = 1'b1;
+
+                        contador = contador + 1;
+                    end
+
+                    else if (contador == 6'b000010) begin
+                        estado = Es_Comum;
+
+                        RegWriteControl = 1'b0;
+
+                        contador = contador + 1;
+                    end
+                end
+
+                Es_Sub: begin
+                    if (contador == 6'b000000) begin
+                        estado = Es_Sub;
+
+                        ALUControl = 3'b010;  
+                        ALUSrcAControl = 2'b10; 
+                        ALUSrcBControl = 2'b10; 
+                        ALUOutControl = 1'b1;
+
+                        contador = contador + 1;
+
+                        if (Overflow == 1'b1) begin
+                            estado = Es_Overflow;
+
+                            contador = 6'b000000;
+                        end
+                    end
+
+                    else if (contador == 6'b000001) begin
+                        estado = Es_Sub;
+
+                        ALUOutControl = 1'b0;
+                        RegDstControl = 2'b11;
+                        DataSrcControl = 3'b100;
+                        RegWriteControl = 1'b1;
+
+                        contador = contador + 1;
+                    end
+
+                    else if (contador == 6'b000010) begin
+                        estado = Es_Sub;
+
+                        RegWriteControl = 1'b0;
+
+                        contador = contador + 1;
+                    end
+                end
+
                 Es_Break: begin
                     if (contador == 6'b000000) begin
                         estado = Es_Break;
