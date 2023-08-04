@@ -488,6 +488,127 @@ module Unid_Controle (
                         contador = 6'b000000;
                     end
                 end
+
+                Es_Addm: begin
+                    if (contador == 6'b000000) begin
+                        estado = Es_Addm;
+
+                        ALUSrcAControl = 2'b10;
+                        ALUSrcBControl = 2'b00;
+                        ALUControl = 3'b001;
+                        ALUOutControl = 1'b1;
+
+                        contador = contador + 1;
+                    end    
+
+                    else if (contador == 6'b000001 || contador == 6'b000010) begin
+                        estado = Es_Addm;
+
+                        ALUOutControl = 1'b0;
+                        IorDControl = 3'b100;
+                        WriteMemControl = 1'b0;
+
+                        contador = contador + 1;
+                    end
+
+                    else if (contador == 6'b000011) begin
+                        estado = Es_Addm;
+
+                        WriteMDRControl = 1'b1;
+
+                        contador = contador + 1;
+                    end
+
+                    else if (contador == 6'b000100) begin
+                        estado = Es_Addm;
+
+                        WriteMDRControl = 1'b0;
+                        ALUSrcAControl = 2'b11;
+                        ALUSrcBControl = 2'b10;
+                        ALUControl = 3'b001;
+                        ALUOutControl = 1'b1;
+
+                        contador = contador + 1;
+                    end
+
+                    else if (contador == 6'b000101 || contador == 6'b000111) begin
+                        estado = Es_Addm;
+
+                        ALUOutControl = 1'b0;
+                        DataSrcControl = 3'b110;
+                        RegDstControl = 2'b01;
+                        RegWriteControl = 1'b1;
+
+                        contador = contador + 1;
+                    end
+
+                    else begin
+                        estado = Es_Comum;
+
+                        RegWriteControl = 1'b0;
+
+                        contador = 6'b000000;
+                    end
+                end
+
+                Es_Divm: begin
+                    if(contador == 6'b000000 || contador == 6'b000001) begin        
+                        estado = Es_Divm;
+
+                        IorDControl = 3'b101;
+                        WriteMemControl = 1'b0;
+
+                        contador = contador + 1;
+                    end
+
+                    else if(contador == 6'b000010) begin
+                        estado = Es_Divm;
+
+                        WriteMDRControl = 1'b1;
+
+                        contador = contador + 1;
+                    end
+
+                    else if(contador == 6'b000011 || contador == 6'b000100) begin        
+                        estado = Es_Divm;
+
+                        WriteMDRControl = 1'b0
+                        IorDControl = 3'b110;
+                        WriteMemControl = 1'b0;
+
+                        contador = contador + 1;
+                    end
+
+                    else if(contador <= 6'b100110) begin
+                        estado = Es_Divm;
+
+                        MDSrcAControl = 1'b1;
+                        MDSrcBControl = 1'b1;
+                        MDControl = 1'b1;
+
+                        contador = contador + 1;
+                    end
+
+                    else if(contador == 6'b100111) begin
+                        estado = Es_Divm;
+
+                        HI_Control = 1'b1;
+                        LO_Control = 1'b1;
+
+                        contador = contador + 1;
+                    end
+
+                    else if(contador == 6'b1001000) begin
+                        estado = Es_Comum;
+
+                        HI_Control = 1'b0;
+                        LO_Control = 1'b0;
+
+                        contador = 6'b000000;
+                    end
+
+                end
+
                 Es_Sw, Es_Sh, Es_Sb: begin
                     if(contador == 6'b000000) begin
 
