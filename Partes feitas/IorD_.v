@@ -20,7 +20,7 @@ module  IorD_(
             3'b011 : IorD_output = ConstNo_Opcode;
 	    3'b100 : IorD_output = ALUresult;
             3'b101 : IorD_output = RegA_out;
-            3'b110 : IorD_output = RegB_out
+            3'b110 : IorD_output = RegB_out;
         endcase
     end
 

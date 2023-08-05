@@ -1,5 +1,5 @@
 module DataSrc_(
-    input wire [2:0] DataSrcControl
+    input wire [2:0] DataSrcControl,
     input wire [31:0] LS_out,   
     input wire [31:0] HI_out,   
     input wire [31:0] LO_out, 
@@ -18,8 +18,8 @@ always @(*) begin
 	3'b011: DataSrc_out  = ShiftReg_out;
 	3'b100: DataSrc_out  = ConstDuzentos_vinte_sete;
 	3'b101: DataSrc_out  = SE1_32_out;
-	3'b110: DataSrc_out  = ALUOut_out_out;
-        endcase
+	3'b110: DataSrc_out = ALUOut_out;
+    endcase
 end
 
 endmodule

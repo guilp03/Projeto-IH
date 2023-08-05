@@ -14,28 +14,28 @@ module cpu(
 
 // Control wires
 
-    wire WriteMemControl;
+    wire WriteMemControl; 
     wire IRWriteControl;
     wire [2:0] ShiftRegControl;
-    wire RegWriteControl;
-    wire [2:0] ALUControl;
+    wire RegWriteControl; //n
+    wire [2:0] ALUControl; //n
     wire PcControl;
     wire HI_writeControl;
     wire LO_writeControl;
     wire RegAControl;
     wire RegBControl;
-    wire ALUOutControl;
+    wire ALUOutControl; //n
     wire WriteMDRControl;
     wire EpcControl;
     wire EX_control;
     wire [1:0] PcSourceControl;
     wire [2:0] IorDControl;
-    wire [1:0] RegDstControl;
+    wire [1:0] RegDstControl; //n
     wire [1:0] ShiftAmtControl;
     wire [1:0] ShiftSrcControl;
-    wire [2:0] DataSrcControl;
-    wire [1:0] ALUSrcAControl;
-    wire [1:0] ALUSrcBControl;
+    wire [2:0] DataSrcControl; //n
+    wire [1:0] ALUSrcAControl; //n
+    wire [1:0] ALUSrcBControl; //n
     wire [1:0] SSControl;
     wire [1:0] LScontrol;
 
