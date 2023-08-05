@@ -334,7 +334,7 @@ module cpu(
         shift_left_2_output
     );
 
-    sign_extended1bit_ sign_extended1bit_(
+    sign_extended1bit sign_extended1bit(
         OFFSET,
         sign_extend_1_out
     );
@@ -348,7 +348,7 @@ module cpu(
         conc_SL26_PC_output
     );
 
-    shift_left_16to32_ shift_left_16to32_(
+    shift_left_16to32 sshift_left_16to32(
         OFFSET,
 
         SL_16to32_out
