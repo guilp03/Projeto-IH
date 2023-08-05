@@ -1,4 +1,4 @@
-module PcSource_   (
+module PcSource_(
 	input wire [1:0]PcSourceControl,
 	input wire [31:0] ALUresult, /* jump */
 	input wire [31:0] conc_SL26_PC_out, /* branch */

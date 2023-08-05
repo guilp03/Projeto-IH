@@ -1,4 +1,4 @@
-module Unid_Controle (
+module unid_controle(
         input wire clock,
         input wire reset,
         // Flags

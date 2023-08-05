@@ -1,4 +1,4 @@
-module sign_extended1bit(
+module sign_extended1bit_(
             input wire input_data,
             output wire [31:0] out_data
             );

@@ -1,4 +1,4 @@
-module ALUSrcB_ (
+module ALUSrcB_(
 	input wire ALUSrcBControl, 
 	input wire [31:0] SE16_32_out, 
 	input wire [31:0] ConstQuatro, 

@@ -359,7 +359,7 @@ module cpu(
         SL_16to32_out
     );
 
-    unid_controle control(
+    unid_controle unid_controle(
         clock,
         reset,
         OPCODE,

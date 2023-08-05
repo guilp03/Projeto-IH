@@ -12,7 +12,7 @@ module cpu(
     wire GT;
     wire LT;
 
-// Control wires
+// Fios de controle
 
     wire WriteMemControl; 
     wire IRWriteControl;
@@ -39,7 +39,7 @@ module cpu(
     wire [1:0] SSControl;
     wire [1:0] LScontrol;
 
-// Data wires
+// Fios de dados
 
     // Constantes
     wire [31:0] ConstDiv0 ;
@@ -296,55 +296,50 @@ module cpu(
         ALUSrcB_out
     );
 
-    MDSrcA_ MDSrcA_(
-        MDSrcAControl,
-        RegA_out,
-        MDR_out,
-        MDSrcA_out
-    );
+    // MDSrcA_ MDSrcA_(
+    //     MDSrcAControl,
+    //     RegA_out,
+    //     MDR_out,
+    //     MDSrcA_out
+    // );
 
-    MDSrcB_ MDSrcB_(
-        MDSrcBControl,
-        RegB_out,
-        Mem_out,
-        MDSrcB_out
-    );
+    // MDSrcB_ MDSrcB_(
+    //     MDSrcBControl,
+    //     RegB_out,
+    //     Mem_out,
+    //     MDSrcB_out
+    // );
 
     // Componentes    
-    StoreSize SS_(
-        SSControl,
-        RegB_out,
-        MDR_out,
-        SS_out
-    );
+    // StoreSize SS_(
+    //     SSControl,
+    //     RegB_out,
+    //     MDR_out,
+    //     SS_out
+    // );
 
-    LoadSize LS_(
-        LScontrol,
-        MDR_out,
-        LS_out
-    );
+    // LoadSize LS_(
+    //     LScontrol,
+    //     MDR_out,
+    //     LS_out
+    // );
 
-    sign_extend8_32_ sign_extend8_32_(
+    sign_extended16_32_ sign_extended16_32_(
         Mem_output,
         sign_extend8_32_output
     );
 
-    SL2_ SL2_(
+    shift_left_32_ shift_left_32_(
         sign_extend_1_out,
         shift_left_2_output
     );
 
-     Sign_extend_1 Sign_extend_1(
+    sign_extended1bit_ sign_extended1bit_(
         OFFSET,
         sign_extend_1_out
     );
 
-    sign_extend1_32_ sign_extend1_32_(
-        LT,
-        sign_extend1_32_output
-    );
-
-    SL_26_28 concatenacao(
+    shift_left_26to28 shift_left_26to28(
         RS,
         RT,
         OFFSET,
@@ -353,13 +348,13 @@ module cpu(
         conc_SL26_PC_output
     );
 
-    SL_16_32_ shiftleft16(
+    shift_left_16to32_ shift_left_16to32_(
         OFFSET,
 
         SL_16to32_out
     );
 
-    unid_controle control(
+    unid_controle unid_controle(
         clock,
         reset,
         OPCODE,

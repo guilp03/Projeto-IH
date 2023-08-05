@@ -1,4 +1,4 @@
-module sign_extended16_32(
+module sign_extended16_32_(
     input wire [15:0] OFFSET,
     output wire [31:0] sign_extended16_32_out
 );
