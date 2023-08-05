@@ -4,6 +4,6 @@ module sign_extended1bit(
             );
             
     // replica o bit de sinal
-    assign out_data = {{31{1'b0}}, input_data}
+    assign out_data = {31'b0, input_data}
 
 endmodule
