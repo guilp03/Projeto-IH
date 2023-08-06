@@ -205,13 +205,15 @@ module unid_controle(
                 RegDstControl = 2'b00; ///
                 RegWriteControl = 1'b0; ///
 
-                contador = contador + 1;
+                //contador = contador + 1;
+
             end
         end 
         else begin
             case(estado)
                 Es_Comum: begin
-                    if (contador == 6'b000000 || contador == 6'b000001 || contador == 6'b000010)begin
+                    //if (contador == 6'b000000 || contador == 6'b000001 || contador == 6'b000010)begin
+                    if (contador == 6'b000000)begin
                         estado = Es_Comum;
 
                         WriteMemControl = 1'b0; ///
@@ -240,10 +242,18 @@ module unid_controle(
                         RegDstControl = 2'b00;
                         RegWriteControl = 1'b0;
 
-                        contador = contador + 1;
-
+                        //contador = contador + 1;
+                        contador = 6'b000001;
                     end
-                    
+
+                    if (contador == 6'b000001)begin
+                        contador = 6'b000010;
+                    end
+
+                    if (contador == 6'b000010)begin
+                        contador = 6'b000011;
+                    end
+  
                     if (contador == 6'b000011)begin
                         estado = Es_Comum;
 

@@ -81,7 +81,7 @@ module cpu(
     wire [31:0] EPC_out;
     wire [31:0] EX_out;
     wire [31:0] PCSource_out;
-    wire [31:0] IorD_output;
+    wire [31:0] IorD_out;
     wire [31:0] DataSrc_out;
     wire [31:0] ShiftSrc_out;
     wire [31:0] ALUSrcA_out;
