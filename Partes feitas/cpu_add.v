@@ -42,7 +42,7 @@ module cpu(
 // Fios de dados
 
     // Constantes
-    wire [31:0] ConstDiv0 ;
+    wire [31:0] ConstDiv0;
     assign ConstDiv0 = 32'b00000000000000000000000011111111;
     wire [31:0] ConstOverflow = 32'b00000000000000000000000011111110;
     assign ConstOverflow = 32'b00000000000000000000000011111110;
@@ -81,7 +81,7 @@ module cpu(
     wire [31:0] EPC_out;
     wire [31:0] EX_out;
     wire [31:0] PCSource_out;
-    wire [31:0] IorD_output;
+    wire [31:0] IorD_out;
     wire [31:0] DataSrc_out;
     wire [31:0] ShiftSrc_out;
     wire [31:0] ALUSrcA_out;
@@ -238,7 +238,7 @@ module cpu(
         ALUresult,
         RegA_out,
         RegB_out,
-        IorD_output
+        IorD_out
     );
 
     RegDst_ RegDst_(
@@ -246,13 +246,13 @@ module cpu(
         ConstVinte_nove,
         RT,
         ConstTrinta_um,
-        OFFSET[15:11],
+        OFFSET,
         RegDst_out
     );
 
     ShiftAmt_ ShiftAmt_(
         ShiftAmtControl,
-        OFFSET[10:6],
+        OFFSET,
         ConstDezesseis,
         RegB_out,
         ShiftAmt_out
@@ -274,7 +274,7 @@ module cpu(
         ShiftReg_out,
         ConstDuzentos_vinte_sete,
         SE1_32_out,
-        ALUOut_out_out,
+        ALUOut_out,
         DataSrc_out
     );
 
@@ -340,9 +340,7 @@ module cpu(
     );
 
     shift_left_26to28 shift_left_26to28(
-        RS,
-        RT,
-        OFFSET,
+        
         PC_output,
 
         conc_SL26_PC_output
@@ -357,6 +355,12 @@ module cpu(
     unid_controle unid_controle(
         clock,
         reset,
+        EQ,
+        GT,
+        Overflow,
+        ZR,
+        LT,
+        NG,
         OPCODE,
         OFFSET,
         WriteMemControl,
@@ -383,10 +387,10 @@ module cpu(
         ALUSrcBControl,
         SSControl,
         LScontrol,
-        EQ,
-        GT,
-        Overflow,
-        reset
+        MDSrcAControl,
+        MDSrcBControl,
+        MDControl,
+        reset_out
     );
 
 endmodule

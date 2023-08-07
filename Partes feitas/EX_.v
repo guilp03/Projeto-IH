@@ -1,5 +1,5 @@
 module EX_( 
-    input wire [1:0] EX_control, /* Entrada de controle */
+    input wire EX_control, /* Entrada de controle */
      input wire [31:0]  PCSource_out,
     input wire [31:0] Mem_out,   /* PC */
     output reg [31:0] EX_out   /* Saída selecionada pelo multiplexador */

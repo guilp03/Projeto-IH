@@ -7,20 +7,20 @@ module  IorD_(
     input wire [31:0] ALUresult,
     input wire [31:0] RegA_out,
     input wire [31:0] RegB_out,
-    output reg [31:0] IorD_output
+    output reg [31:0] IorD_out
 );
     
 
 
-	always @(PC_out or ConstDiv0 or ConstOverflow or ConstNo_Opcode or ALUresult or RegA_out or RegB_out )begin
+	always @(*)begin
         case(IorDControl)
-            3'b000 : IorD_output =  PC_out;
-            3'b001 : IorD_output = ConstDiv0;
-            3'b010 : IorD_output = ConstOverflow;
-            3'b011 : IorD_output = ConstNo_Opcode;
-	    3'b100 : IorD_output = ALUresult;
-            3'b101 : IorD_output = RegA_out;
-            3'b110 : IorD_output = RegB_out;
+            3'b000 : IorD_out = PC_out;
+            3'b001 : IorD_out = ConstDiv0;
+            3'b010 : IorD_out = ConstOverflow;
+            3'b011 : IorD_out = ConstNo_Opcode;
+	        3'b100 : IorD_out = ALUresult;
+            3'b101 : IorD_out = RegA_out;
+            3'b110 : IorD_out = RegB_out;
         endcase
     end
 

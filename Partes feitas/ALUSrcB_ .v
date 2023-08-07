@@ -1,5 +1,5 @@
 module ALUSrcB_(
-	input wire ALUSrcBControl, 
+	input wire [1:0] ALUSrcBControl, 
 	input wire [31:0] SE16_32_out, 
 	input wire [31:0] ConstQuatro, 
 	input wire [31:0] RegB_out,
