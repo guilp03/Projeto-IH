@@ -5,7 +5,7 @@ module shift_left_26to28(
             input wire [3:0] PC_output,
             output wire [31:0] out_data
             );
-
+    
     wire [27:0] conc_data;
 
     assign conc_data = {OFFSET, RS, RT, 2'b00};

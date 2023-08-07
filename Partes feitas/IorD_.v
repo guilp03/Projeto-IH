@@ -14,7 +14,7 @@ module  IorD_(
 
 	always @(*)begin
         case(IorDControl)
-            3'b000 : IorD_out = PC_out;
+            3'b000 : IorD_out =  PC_out;
             3'b001 : IorD_out = ConstDiv0;
             3'b010 : IorD_out = ConstOverflow;
             3'b011 : IorD_out = ConstNo_Opcode;
