@@ -6,7 +6,7 @@ module ALUSrcB_(
 	input wire [31:0] SL2_out, 
 	output reg [31:0] ALUSrcB_out /* saida */
 );
-always @(SE16_32_out or ConstQuatro or RegB_out or SL2_out ) begin
+always @(*) begin
         case(ALUSrcBControl)
             2'b00 : ALUSrcB_out  = SE16_32_out ;
             2'b01 :  ALUSrcB_out = ConstQuatro ; 

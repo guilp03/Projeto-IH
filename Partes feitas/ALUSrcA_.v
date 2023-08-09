@@ -7,12 +7,12 @@ module ALUSrcA_(
     output reg [31:0] ALUSrcA_out   /* Saída selecionada pelo multiplexador */
 );
   
-always @(ALUOut_out or PC_out or RegA_out or MDR_out) begin
+always @(*) begin
     case (ALUSrcAControl) 
          /* Verifica o valor do seletor */
 	    2'b00: ALUSrcA_out = ALUOut_out;
-        2'b10: ALUSrcA_out = PC_out; /* Seletor = 2'b00, seleciona input1 (PC) */
-        2'b01: ALUSrcA_out = RegA_out; /* Seletor = 2'b10, seleciona input3 (reg A) */
+        2'b01: ALUSrcA_out = PC_out; /* Seletor = 2'b00, seleciona input1 (PC) */
+        2'b10: ALUSrcA_out = RegA_out; /* Seletor = 2'b10, seleciona input3 (reg A) */
         2'b11: ALUSrcA_out = MDR_out; /* Seletor = 2'b01, seleciona input2 (addm) */
 	
         endcase

@@ -44,12 +44,12 @@ module cpu(
     // Constantes
     wire [31:0] ConstDiv0;
     assign ConstDiv0 = 32'b00000000000000000000000011111111;
-    wire [31:0] ConstOverflow = 32'b00000000000000000000000011111110;
+    wire [31:0] ConstOverflow;
     assign ConstOverflow = 32'b00000000000000000000000011111110;
-    wire [31:0] ConstNo_Opcode = 32'b00000000000000000000000011111101;
+    wire [31:0] ConstNo_Opcode;
     assign ConstNo_Opcode = 32'b00000000000000000000000011111101;
-    wire [31:0] ConstQuatro = 32'b00000000000000000000000000000010;
-    assign ConstQuatro = 32'b00000000000000000000000000000010;
+    wire [31:0] ConstQuatro;
+    assign ConstQuatro = 32'b00000000000000000000000000000100;
     wire [31:0] ConstVinte_nove = 32'b00000000000000000000000000011101;
     assign ConstVinte_nove = 32'b00000000000000000000000000011101;
     wire [31:0] ConstTrinta_um = 32'b00000000000000000000000000011111;
@@ -324,33 +324,33 @@ module cpu(
     //     LS_out
     // );
 
-    sign_extended16_32_ sign_extended16_32_(
-        Mem_output,
-        sign_extend8_32_output
-    );
+    // sign_extended16_32_ sign_extended16_32_(
+    //     Mem_output,
+    //     sign_extend8_32_output
+    // );
 
-    shift_left_32_ shift_left_32_(
-        sign_extend_1_out,
-        shift_left_2_output
-    );
+    // shift_left_32_ shift_left_32_(
+    //     sign_extend_1_out,
+    //     shift_left_2_output
+    // );
 
-    sign_extended1bit sign_extended1bit(
-        OFFSET,
-        sign_extend_1_out
-    );
+    // sign_extended1bit sign_extended1bit(
+    //     OFFSET,
+    //     sign_extend_1_out
+    // );
 
-    shift_left_26to28 shift_left_26to28(
+    // shift_left_26to28 shift_left_26to28(
         
-        PC_output,
+    //     PC_output,
 
-        conc_SL26_PC_output
-    );
+    //     conc_SL26_PC_output
+    // );
 
-    shift_left_16to32 sshift_left_16to32(
-        OFFSET,
+    // shift_left_16to32 sshift_left_16to32(
+    //     OFFSET,
 
-        SL_16to32_out
-    );
+    //     SL_16to32_out
+    // );
 
     unid_controle unid_controle(
         clock,
