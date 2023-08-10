@@ -521,7 +521,7 @@ module unid_controle(
 
                         else begin
                             ALUOutControl = 1'b0;
-                            RegDstControl = 2'b10;
+                            RegDstControl = 2'b01;
                             DataSrcControl = 3'b110;
                             RegWriteControl = 1'b1;
 
