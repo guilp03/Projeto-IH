@@ -1,6 +1,6 @@
 module ALUSrcA_( 
     input wire [1:0] ALUSrcAControl, /* Entrada de controle */
-	input wire [31:0]  ALUOut_out,
+	input wire [31:0] ALUOut_out,
     input wire [31:0] PC_out,   /* PC */
     input wire [31:0] RegA_out,   /* reg A */
     input wire [31:0] MDR_out,   /* addm */

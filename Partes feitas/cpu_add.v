@@ -88,6 +88,7 @@ module cpu(
     wire [31:0] ALUSrcB_out;
     wire [31:0] SS_out;
     wire [31:0] LS_out;
+    wire [31:0] sign_extended16_32_out;
 
     // Padrão: Sinal -> Dados_in -> Dados_out
     // Componentes dados
@@ -289,7 +290,7 @@ module cpu(
 
     ALUSrcB_ ALUSrcB_(
         ALUSrcBControl,
-        SE16_32_out,
+        sign_extended16_32_out,
         ConstQuatro,
         RegB_out,
         SL2_out,
@@ -324,10 +325,10 @@ module cpu(
     //     LS_out
     // );
 
-    // sign_extended16_32_ sign_extended16_32_(
-    //     Mem_output,
-    //     sign_extend8_32_output
-    // );
+    sign_extended16_32_ sign_extended16_32_(
+        OFFSET,
+        sign_extended16_32_out
+    );
 
     // shift_left_32_ shift_left_32_(
     //     sign_extend_1_out,
@@ -390,7 +391,7 @@ module cpu(
         MDSrcAControl,
         MDSrcBControl,
         MDControl,
-        reset_out
+        reset
     );
 
 endmodule
