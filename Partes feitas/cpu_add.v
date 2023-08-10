@@ -12,44 +12,44 @@ module cpu(
     wire GT;
     wire LT;
 
-// Control wires
+// Fios de controle
 
-    wire WriteMemControl;
+    wire WriteMemControl; 
     wire IRWriteControl;
     wire [2:0] ShiftRegControl;
-    wire RegWriteControl;
-    wire [2:0] ALUControl;
+    wire RegWriteControl; //n
+    wire [2:0] ALUControl; //n
     wire PcControl;
     wire HI_writeControl;
     wire LO_writeControl;
     wire RegAControl;
     wire RegBControl;
-    wire ALUOutControl;
+    wire ALUOutControl; //n
     wire WriteMDRControl;
     wire EpcControl;
     wire EX_control;
     wire [1:0] PcSourceControl;
     wire [2:0] IorDControl;
-    wire [1:0] RegDstControl;
+    wire [1:0] RegDstControl; //n
     wire [1:0] ShiftAmtControl;
     wire [1:0] ShiftSrcControl;
-    wire [2:0] DataSrcControl;
-    wire [1:0] ALUSrcAControl;
-    wire [1:0] ALUSrcBControl;
+    wire [2:0] DataSrcControl; //n
+    wire [1:0] ALUSrcAControl; //n
+    wire [1:0] ALUSrcBControl; //n
     wire [1:0] SSControl;
     wire [1:0] LScontrol;
 
-// Data wires
+// Fios de dados
 
     // Constantes
-    wire [31:0] ConstDiv0 ;
+    wire [31:0] ConstDiv0;
     assign ConstDiv0 = 32'b00000000000000000000000011111111;
-    wire [31:0] ConstOverflow = 32'b00000000000000000000000011111110;
+    wire [31:0] ConstOverflow;
     assign ConstOverflow = 32'b00000000000000000000000011111110;
-    wire [31:0] ConstNo_Opcode = 32'b00000000000000000000000011111101;
+    wire [31:0] ConstNo_Opcode;
     assign ConstNo_Opcode = 32'b00000000000000000000000011111101;
-    wire [31:0] ConstQuatro = 32'b00000000000000000000000000000010;
-    assign ConstQuatro = 32'b00000000000000000000000000000010;
+    wire [31:0] ConstQuatro;
+    assign ConstQuatro = 32'b00000000000000000000000000000100;
     wire [31:0] ConstVinte_nove = 32'b00000000000000000000000000011101;
     assign ConstVinte_nove = 32'b00000000000000000000000000011101;
     wire [31:0] ConstTrinta_um = 32'b00000000000000000000000000011111;
@@ -81,13 +81,14 @@ module cpu(
     wire [31:0] EPC_out;
     wire [31:0] EX_out;
     wire [31:0] PCSource_out;
-    wire [31:0] IorD_output;
+    wire [31:0] IorD_out;
     wire [31:0] DataSrc_out;
     wire [31:0] ShiftSrc_out;
     wire [31:0] ALUSrcA_out;
     wire [31:0] ALUSrcB_out;
     wire [31:0] SS_out;
     wire [31:0] LS_out;
+    wire [31:0] sign_extended16_32_out;
 
     // Padrão: Sinal -> Dados_in -> Dados_out
     // Componentes dados
@@ -213,14 +214,14 @@ module cpu(
     // Componentes feitos
     // Multiplexadores
 
-    ex EX_(
+    EX_ EX_(
         EX_control,
         PCSource_out,
         Mem_out,
         EX_out
     );
 
-    pcsrc PcSource_(
+    PcSource_ PcSource_(
         PcSourceControl,
         ALUresult,
         conc_SL26_PC_out,
@@ -229,7 +230,7 @@ module cpu(
         PCSource_out
     );
 
-    iord IorD_(
+    IorD_ IorD_(
         IorDControl,
         PC_out,
         ConstDiv0,
@@ -238,27 +239,27 @@ module cpu(
         ALUresult,
         RegA_out,
         RegB_out,
-        IorD_output
+        IorD_out
     );
 
-    reg_destination RegDst_(
+    RegDst_ RegDst_(
         RegDstControl,
         ConstVinte_nove,
         RT,
         ConstTrinta_um,
-        OFFSET[15:11],
+        OFFSET,
         RegDst_out
     );
 
-    shift_amount ShiftAmt_(
+    ShiftAmt_ ShiftAmt_(
         ShiftAmtControl,
-        OFFSET[10:6],
+        OFFSET,
         ConstDezesseis,
         RegB_out,
         ShiftAmt_out
     );
 
-    shift_src ShiftSrc_(
+    ShiftSrc_ ShiftSrc_(
         ShiftSrcControl,
         RegB_out,
         RegA_out,
@@ -266,7 +267,7 @@ module cpu(
         ShiftSrc_out
     );
 
-    datasrc DataSrc_(
+    DataSrc_ DataSrc_(
         DataSrcControl,
         LS_out,
         HI_out,
@@ -274,11 +275,11 @@ module cpu(
         ShiftReg_out,
         ConstDuzentos_vinte_sete,
         SE1_32_out,
-        ALUOut_out_out,
+        ALUOut_out,
         DataSrc_out
     );
 
-    ALUSrcA ALUSrcA_(
+    ALUSrcA_ ALUSrcA_(
         ALUSrcAControl,
         ALUOut_out,
         PC_out,
@@ -287,81 +288,80 @@ module cpu(
         ALUSrcA_out
     );
 
-    ALUSrcB ALUSrcB_(
+    ALUSrcB_ ALUSrcB_(
         ALUSrcBControl,
-        SE16_32_out,
+        sign_extended16_32_out,
         ConstQuatro,
         RegB_out,
         SL2_out,
         ALUSrcB_out
     );
 
-    MDSrcA MDSrcA_(
-        MDSrcAControl,
-        RegA_out,
-        MDR_out,
-        MDSrcA_out
-    );
+    // MDSrcA_ MDSrcA_(
+    //     MDSrcAControl,
+    //     RegA_out,
+    //     MDR_out,
+    //     MDSrcA_out
+    // );
 
-    MDSrcB MDSrcB_(
-        MDSrcBControl,
-        RegB_out,
-        Mem_out,
-        MDSrcB_out
-    );
+    // MDSrcB_ MDSrcB_(
+    //     MDSrcBControl,
+    //     RegB_out,
+    //     Mem_out,
+    //     MDSrcB_out
+    // );
 
     // Componentes    
-    StoreSize SS_(
-        SSControl,
-        RegB_out,
-        MDR_out,
-        SS_out
-    );
+    // StoreSize SS_(
+    //     SSControl,
+    //     RegB_out,
+    //     MDR_out,
+    //     SS_out
+    // );
 
-    LoadSize LS_(
-        LScontrol,
-        MDR_out,
-        LS_out
-    );
+    // LoadSize LS_(
+    //     LScontrol,
+    //     MDR_out,
+    //     LS_out
+    // );
 
-    sign_extend8_32 sign_extend8_32_(
-        Mem_output,
-        sign_extend8_32_output
-    );
-
-    shift_left_2 SL2_(
-        sign_extend_1_out,
-        shift_left_2_output
-    );
-
-    sign_extend_1 Sign_extend_1(
+    sign_extended16_32_ sign_extended16_32_(
         OFFSET,
-        sign_extend_1_out
+        sign_extended16_32_out
     );
 
-    sign_extend1_32 sign_extend1_32_(
-        LT,
-        sign_extend1_32_output
-    );
+    // shift_left_32_ shift_left_32_(
+    //     sign_extend_1_out,
+    //     shift_left_2_output
+    // );
 
-    SL_26to28_PC concatenacao(
-        RS,
-        RT,
-        OFFSET,
-        PC_output,
+    // sign_extended1bit sign_extended1bit(
+    //     OFFSET,
+    //     sign_extend_1_out
+    // );
 
-        conc_SL26_PC_output
-    );
+    // shift_left_26to28 shift_left_26to28(
+        
+    //     PC_output,
 
-    SL_16to32 shiftleft16(
-        OFFSET,
+    //     conc_SL26_PC_output
+    // );
 
-        SL_16to32_out
-    );
+    // shift_left_16to32 sshift_left_16to32(
+    //     OFFSET,
 
-    control control(
+    //     SL_16to32_out
+    // );
+
+    unid_controle unid_controle(
         clock,
         reset,
+        EQ,
+        GT,
+        Overflow,
+        ZR,
+        LT,
+        NG,
         OPCODE,
         OFFSET,
         WriteMemControl,
@@ -388,9 +388,9 @@ module cpu(
         ALUSrcBControl,
         SSControl,
         LScontrol,
-        EQ,
-        GT,
-        Overflow,
+        MDSrcAControl,
+        MDSrcBControl,
+        MDControl,
         reset
     );
 

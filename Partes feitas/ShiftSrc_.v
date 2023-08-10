@@ -6,7 +6,6 @@ module ShiftSrc_(
     output reg [31:0]  ShiftSrc_out
 );
 
-endmodule
 always @(*) begin
     case ( ShiftSrcControl)          
         2'b00:  ShiftSrc_out = RegB_out ; 
@@ -14,7 +13,5 @@ always @(*) begin
         2'b10:  ShiftSrc_out = SL16_32_out; 
         endcase 
 end
-
-);
 
 endmodule
