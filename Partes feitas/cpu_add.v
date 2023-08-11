@@ -310,20 +310,19 @@ module cpu(
     //     Mem_out,
     //     MDSrcB_out
     // );
+    
+    StoreSize StoreSize(
+        SSControl,
+        RegB_out,
+        MDR_out,
+        SS_out
+    );
 
-    // Componentes    
-    // StoreSize SS_(
-    //     SSControl,
-    //     RegB_out,
-    //     MDR_out,
-    //     SS_out
-    // );
-
-    // LoadSize LS_(
-    //     LScontrol,
-    //     MDR_out,
-    //     LS_out
-    // );
+     LoadSize LoadSize(
+        LScontrol,
+        MDR_out,
+        LS_out
+    );
 
     sign_extended16_32_ sign_extended16_32_(
         OFFSET,
