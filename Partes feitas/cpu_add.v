@@ -329,28 +329,28 @@ module cpu(
         sign_extended16_32_out
     );
 
-    // shift_left_32_ shift_left_32_(
-    //     sign_extend_1_out,
-    //     shift_left_2_output
-    // );
+    shift_left_32_ shift_left_32_(
+        sign_extend_1_out,
+         hift_left_2_output
+    );
 
-    // sign_extended1bit sign_extended1bit(
-    //     OFFSET,
-    //     sign_extend_1_out
-    // );
+    sign_extended1bit sign_extended1bit(
+        OFFSET,
+        sign_extend_1_out
+    );
 
-    // shift_left_26to28 shift_left_26to28(
+    shift_left_26to28 shift_left_26to28(
         
-    //     PC_output,
+        PC_output,
 
-    //     conc_SL26_PC_output
-    // );
+        conc_SL26_PC_output
+    );
 
-    // shift_left_16to32 sshift_left_16to32(
-    //     OFFSET,
+    shift_left_16to32 sshift_left_16to32(
+        OFFSET,
 
-    //     SL_16to32_out
-    // );
+        SL_16to32_out
+    );
 
     unid_controle unid_controle(
         clock,
