@@ -318,19 +318,11 @@ module cpu(
         MDSrcB_out
     );
 
-    // Componentes    
-    // StoreSize SS_(
-    //     SSControl,
-    //     RegB_out,
-    //     MDR_out,
-    //     SS_out
-    // );
-
-    // LoadSize LS_(
-    //     LScontrol,
-    //     MDR_out,
-    //     LS_out
-    // );
+     LoadSize LoadSize(
+        LScontrol,
+        MDR_out,
+        LS_out
+    );
 
     sign_extended16_32_ sign_extended16_32_(
         OFFSET,
@@ -360,11 +352,11 @@ module cpu(
         shift_left_26to32_jump_out
     );
 
-    // shift_left_16to32 sshift_left_16to32(
-    //     OFFSET,
+    shift_left_16to32 sshift_left_16to32(
+        OFFSET,
 
-    //     SL_16to32_out
-    // );
+        SL_16to32_out
+    );
 
     unid_controle unid_controle(
         clock,
