@@ -542,6 +542,48 @@ module unid_controle(
                     end
                 end
 
+                Es_Slt: begin
+                    if (contador == 6'b000000) begin 
+                        ALUSrcAControl = 2'b10;
+                        ALUSrcBControl = 2'b10;
+                        ALUControl = 3'b111;
+                        DataSrcControl = 3'b101;
+                        RegDstControl = 2'b11;
+                        RegWriteControl = 1'b1;
+
+                        contador = contador + 1;
+                        estado = Es_Slt;
+                    end
+
+                    else begin
+                        RegWriteControl = 1'b0;
+
+                        contador = 6'b000000;
+                        estado = Es_Leitura_1;
+                    end
+                end
+
+                Es_Slti: begin
+                    if (contador == 6'b000000) begin 
+                        ALUSrcAControl = 2'b10;
+                        ALUSrcBControl = 2'b00;
+                        ALUControl = 3'b111;
+                        DataSrcControl = 3'b101;
+                        RegDstControl = 2'b01;
+                        RegWriteControl = 1'b1;
+
+                        contador = contador + 1;
+                        estado = Es_Slti;
+                    end
+
+                    else begin
+                        RegWriteControl = 1'b0;
+
+                        contador = 6'b000000;
+                        estado = Es_Leitura_1;
+                    end
+                end
+
                 Es_Jr: begin
                     if (contador == 6'b000000) begin 
                         ALUSrcAControl = 2'b10;

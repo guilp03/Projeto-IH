@@ -95,6 +95,7 @@ module cpu(
     wire [31:0] MDSrcA_out;
     wire [31:0] MDSrcB_out;
     wire [31:0] shift_left_26to32_jump_out;
+    wire [31:0] sign_extended1_32_out;
 
     // Padrão: Sinal -> Dados_in -> Dados_out
     // Componentes dados
@@ -280,7 +281,7 @@ module cpu(
         LO_out,
         ShiftReg_out,
         ConstDuzentos_vinte_sete,
-        SE1_32_out,
+        sign_extended1_32_out,
         ALUOut_out,
         DataSrc_out
     );
@@ -346,10 +347,10 @@ module cpu(
     //     shift_left_2_output
     // );
 
-    // sign_extended1bit sign_extended1bit(
-    //     OFFSET,
-    //     sign_extend_1_out
-    // );
+    sign_extended1_32_ sign_extended1_32_(
+        LT,
+        sign_extended1_32_out
+    );
 
     shift_left_26to32_jump_ shift_left_26to32_jump_(
         RS,
