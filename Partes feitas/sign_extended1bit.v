@@ -1,7 +1,7 @@
-module sign_extended1bit(
-            input wire input_data,
-            output wire [31:0] out_data
-            );
+module sign_extended1_32_(
+    input wire LT,
+    output wire [31:0] sign_extended1_32_out
+    );
 
-    assign out_data = {{31{input_data}}, input_data};
+    assign sign_extended1_32_out = {{31{1'b0}}, LT};
 endmodule   
