@@ -1063,52 +1063,61 @@ module unid_controle(
                         RegBControl = 1'b0; //
                         ALUOutControl = 1'b1; //
                         ALUSrcAControl = 2'b10; //
-                        ALUSrcBControl = 3'b011; //
+                        ALUSrcBControl = 2'b00; //
 
                         contador = contador + 1;
                     end
-
-                    else if(contador == 6'b000001 || contador == 6'b000010 || contador == 6'b000011) begin
-                        WriteMemControl = 1'b0; //
+                    if (contador == 6'b000001)begin
                         ALUOutControl = 1'b0; //
-                        IorDControl = 3'b110; //
+
+                        contador = contador + 1;
+
+                    end
+                    else if(contador == 6'b000010 || contador == 6'b000011 || contador == 6'b000100) begin
+                        WriteMemControl = 1'b0; //
+                        IorDControl = 3'b100; //
+                        WriteMDRControl = 1'b1; //
 
                         contador = contador + 1;
                     end
 
-                    else if(contador == 6'b000100)begin
+                    else if(contador == 6'b000101)begin
                         case(estado)
                             Es_Lw:begin
-                                estado = Es_Leitura_1;
 
-                                DataSrcControl = 3'b111; //
+                                DataSrcControl = 3'b000; //
                                 LScontrol = 2'b01; //
-                                RegDstControl = 2'b11; //
+                                RegDstControl = 2'b01; //
                                 RegWriteControl = 1'b1; //
 
-                                contador = 6'b000000;
+                                contador = contador +1;
                             end
                             Es_Lb:begin
-                                estado = Es_Leitura_1;
 
-                                DataSrcControl = 3'b111; //
+                                DataSrcControl = 3'b000; //
                                 LScontrol = 2'b10; //
-                                RegDstControl = 2'b11; //
+                                RegDstControl = 2'b01; //
                                 RegWriteControl = 1'b1; //
 
-                                contador = 6'b000000;
+                                contador = contador +1;
                             end
                             Es_Lh:begin
-                                estado = Es_Leitura_1;
 
-                                DataSrcControl = 3'b111; //
+                                DataSrcControl = 3'b000; //
                                 LScontrol = 2'b11; //
-                                RegDstControl = 2'b11; //
+                                RegDstControl = 2'b01; //
                                 RegWriteControl = 1'b1; //
 
-                                contador = 6'b000000;
+                                contador = contador + 1;
                             end
                             endcase
+                    end
+                    else if(contador == 6'b000110)begin
+                        estado = Es_Leitura_1;
+
+                        RegWriteControl = 1'b0; //
+
+                        contador = 6'b000000;
                     end
                 end 
                 Es_Lui:begin

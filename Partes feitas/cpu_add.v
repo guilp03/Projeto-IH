@@ -332,6 +332,14 @@ module cpu(
         LS_out
     );
 
+    StoreSize StoreSize(
+        SSControl,
+        RegB_out,
+        MDR_out,
+
+        SS_out
+    );
+
     sign_extended16_32_ sign_extended16_32_(
         OFFSET,
         sign_extended16_32_out
