@@ -8,8 +8,8 @@ module ShiftSrc_(
 
 always @(*) begin
     case ( ShiftSrcControl)          
-        2'b00:  ShiftSrc_out = RegB_out ; 
-        2'b01:  ShiftSrc_out = RegA_out; 
+        2'b00:  ShiftSrc_out = RegB_out; //rt
+        2'b01:  ShiftSrc_out = RegA_out; //rs 
         2'b10:  ShiftSrc_out = SL16_32_out; 
         endcase 
 end

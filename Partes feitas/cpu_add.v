@@ -58,8 +58,8 @@ module cpu(
     assign ConstTrinta_um = 32'b00000000000000000000000000011111;
     wire [31:0] ConstDuzentos_vinte_sete;
     assign ConstDuzentos_vinte_sete = 32'b00000000000000000000000011100011;
-    wire [31:0] ConstDezesseis;
-    assign ConstDezesseis = 32'b00000000000000000000000000001000;
+    wire [31:0] ConstDezesseis = 32'b00000000000000000000000000010000;
+    assign ConstDezesseis = 32'b00000000000000000000000000010000;
 
     wire [31:26] OPCODE;
     wire [25:21] RS;
@@ -91,6 +91,7 @@ module cpu(
     wire [31:0] SS_out;
     wire [31:0] LS_out;
     wire [31:0] sign_extended16_32_out;
+    wire [31:0] SL_16_32_out;
     wire [31:0] shift_left8_32_exce_out;
     wire [31:0] MDSrcA_out;
     wire [31:0] MDSrcB_out;
@@ -272,7 +273,7 @@ module cpu(
         ShiftSrcControl,
         RegB_out,
         RegA_out,
-        SL16_32_out,
+        SL_16_32_out,
         ShiftSrc_out
     );
 
@@ -331,6 +332,14 @@ module cpu(
         LS_out
     );
 
+    StoreSize StoreSize(
+        SSControl,
+        RegB_out,
+        MDR_out,
+
+        SS_out
+    );
+
     sign_extended16_32_ sign_extended16_32_(
         OFFSET,
         sign_extended16_32_out
@@ -359,10 +368,10 @@ module cpu(
         shift_left_26to32_jump_out
     );
 
-    shift_left_16to32 sshift_left_16to32(
+    shift_left_16to32 shift_left_16to32(
         OFFSET,
 
-        SL_16to32_out
+        SL_16_32_out
     );
 
     unid_controle unid_controle(
