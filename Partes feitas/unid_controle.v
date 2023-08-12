@@ -604,6 +604,21 @@ module unid_controle(
                     end
                 end
 
+                Es_Mfhi, Es_Mflo: begin
+                    RegAControl = 1'b0;
+                    RegBControl = 1'b0;
+                    RegWriteControl = 1'b1;
+                    RegDstControl = 2'b11; // rd ?
+                    
+                    if (estado == Es_Mfhi) begin
+                        DataSrcControl = 3'b010; // Hi
+                    end
+
+                    else if (estado == Es_Mflo) begin
+                        DataSrcControl = 3'b000; // Lo
+                    end
+                end
+
                 Es_Jal: begin
                     if (contador == 6'b000000) begin                   
                         ALUSrcAControl = 2'b01; //Pc+4 no $RA
