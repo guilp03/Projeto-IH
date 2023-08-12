@@ -89,6 +89,8 @@ module cpu(
     wire [31:0] SS_out;
     wire [31:0] LS_out;
     wire [31:0] sign_extended16_32_out;
+    wire [31:0] shift_left_16to32_out;
+    wire [31:0] shift_left_2x_out;
 
     // Padrão: Sinal -> Dados_in -> Dados_out
     // Componentes dados
@@ -293,8 +295,13 @@ module cpu(
         sign_extended16_32_out,
         ConstQuatro,
         RegB_out,
-        SL2_out,
+        shift_left_2x_out,
         ALUSrcB_out
+    );
+
+    shift_left_2x_ shift_left_2x_(
+        OFFSET,
+        shift_left_2x_out
     );
 
     // MDSrcA_ MDSrcA_(

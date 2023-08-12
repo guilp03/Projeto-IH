@@ -473,83 +473,155 @@ module unid_controle(
                 end
                 Es_Beq: begin 
                     if (contador==6'b000000) begin 
-                        estado = Es_Rte;
+                        estado = Es_Beq;
 
                         ALUSrcAControl = 2'b10;
-                        ALUSrcBControl = 2'b11;
+                        ALUSrcBControl = 2'b10;
                         ALUControl = 3'b111;
-                        ALUOutControl = 1'b1;
 
                         contador = contador + 1;
 
                     end 
                     else if (contador==6'b000001) begin 
                         if (EQ==1) begin 
-                            PcSourceControl = 2'b10;
-                            PcControl = 1'b1;
+                            ALUSrcAControl = 2'b01;
+                            ALUSrcBControl = 2'b11;
+                            ALUControl = 3'b001;
+                            ALUOutControl = 1'b1;
+                            contador = contador + 1;
                         end 
+                        else begin
+                            estado = Es_Leitura_1;
+                            contador = 6'b000000;
+                        end
+                    end
+                    else if (contador==6'b000010) begin
+                        PcSourceControl = 2'b10;
+                        PcControl = 1'b1;
+                        ALUOutControl = 1'b0;
+                        EX_control = 1'b0;
+                        contador = contador + 1;
+
+                    end
+                    else if (contador==6'b000011) begin
+                        PcControl = 1'b0;
+                        contador = 6'b000000;
                         estado = Es_Leitura_1;
-                    end 
+                    end
                 end
                 Es_Bne: begin 
                     if (contador==6'b000000) begin 
-                        estado = Es_Rte;
+                        estado = Es_Bne;
 
                         ALUSrcAControl = 2'b10;
-                        ALUSrcBControl = 2'b11;
+                        ALUSrcBControl = 2'b10;
                         ALUControl = 3'b111;
-                        ALUOutControl = 1'b1;
 
                         contador = contador + 1;
 
                     end 
                     else if (contador==6'b000001) begin 
                         if (EQ==0) begin 
-                            PcSourceControl = 2'b10;
-                            PcControl = 1'b1;
+                            ALUSrcAControl = 2'b01;
+                            ALUSrcBControl = 2'b11;
+                            ALUControl = 3'b001;
+                            ALUOutControl = 1'b1;
+                            contador = contador + 1;
                         end 
+                        else begin
+                            estado = Es_Leitura_1;
+                            contador = 6'b000000;
+                        end
+                    end
+                    else if (contador==6'b000010) begin
+                        PcSourceControl = 2'b10;
+                        PcControl = 1'b1;
+                        ALUOutControl = 1'b0;
+                        EX_control = 1'b0;
+                        contador = contador + 1;
+
+                    end
+                    else if (contador==6'b000011) begin
+                        PcControl = 1'b0;
+                        contador = 6'b000000;
                         estado = Es_Leitura_1;
-                    end 
+                    end
                 end
                 Es_Ble: begin 
                     if (contador==6'b000000) begin 
-                        estado = Es_Rte;
+                        estado = Es_Ble;
 
                         ALUSrcAControl = 2'b10;
-                        ALUSrcBControl = 2'b11;
+                        ALUSrcBControl = 2'b10;
                         ALUControl = 3'b111;
-                        ALUOutControl = 1'b1;
 
                         contador = contador + 1;
 
                     end 
                     else if (contador==6'b000001) begin 
                         if (GT==0) begin 
-                            PcSourceControl = 2'b10;
-                            PcControl = 1'b1;
+                            ALUSrcAControl = 2'b01;
+                            ALUSrcBControl = 2'b11;
+                            ALUControl = 3'b001;
+                            ALUOutControl = 1'b1;
+                            contador = contador + 1;
                         end 
-                    end 
-                    estado = Es_Leitura_1;
+                        else begin
+                            estado = Es_Leitura_1;
+                            contador = 6'b000000;
+                        end
+                    end
+                    else if (contador==6'b000010) begin
+                        PcSourceControl = 2'b10;
+                        PcControl = 1'b1;
+                        ALUOutControl = 1'b0;
+                        EX_control = 1'b0;
+                        contador = contador + 1;
+
+                    end
+                    else if (contador==6'b000011) begin
+                        PcControl = 1'b0;
+                        contador = 6'b000000;
+                        estado = Es_Leitura_1;
+                    end
                 end
                 Es_Bgt: begin 
                     if (contador==6'b000000) begin 
-                        estado = Es_Rte;
+                        estado = Es_Bgt;
 
                         ALUSrcAControl = 2'b10;
-                        ALUSrcBControl = 2'b11;
+                        ALUSrcBControl = 2'b10;
                         ALUControl = 3'b111;
-                        ALUOutControl = 1'b1;
 
                         contador = contador + 1;
 
                     end 
                     else if (contador==6'b000001) begin 
                         if (GT==1) begin 
-                            PcSourceControl = 2'b10;
-                            PcControl = 1'b1;
+                            ALUSrcAControl = 2'b01;
+                            ALUSrcBControl = 2'b11;
+                            ALUControl = 3'b001;
+                            ALUOutControl = 1'b1;
+                            contador = contador + 1;
                         end 
-                     estado = Es_Leitura_1;
-                    end 
+                        else begin
+                            estado = Es_Leitura_1;
+                            contador = 6'b000000;
+                        end
+                    end
+                    else if (contador==6'b000010) begin
+                        PcSourceControl = 2'b10;
+                        PcControl = 1'b1;
+                        ALUOutControl = 1'b0;
+                        EX_control = 1'b0;
+                        contador = contador + 1;
+
+                    end
+                    else if (contador==6'b000011) begin
+                        PcControl = 1'b0;
+                        contador = 6'b000000;
+                        estado = Es_Leitura_1;
+                    end
                 end               
 
                 Es_And: begin
