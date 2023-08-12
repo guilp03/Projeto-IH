@@ -56,8 +56,8 @@ module cpu(
     assign ConstTrinta_um = 32'b00000000000000000000000000011111;
     wire [31:0] ConstDuzentos_vinte_sete = 32'b00000000000000000000000011100011;
     assign ConstDuzentos_vinte_sete = 32'b00000000000000000000000011100011;
-    wire [31:0] ConstDezesseis = 32'b00000000000000000000000000001000;
-    assign ConstDezesseis = 32'b00000000000000000000000000001000;
+    wire [31:0] ConstDezesseis = 32'b00000000000000000000000000010000;
+    assign ConstDezesseis = 32'b00000000000000000000000000010000;
 
     wire [31:26] OPCODE;
     wire [25:21] RS;
@@ -89,6 +89,7 @@ module cpu(
     wire [31:0] SS_out;
     wire [31:0] LS_out;
     wire [31:0] sign_extended16_32_out;
+    wire [31:0] SL_16_32_out;
 
     // Padrão: Sinal -> Dados_in -> Dados_out
     // Componentes dados
@@ -263,7 +264,7 @@ module cpu(
         ShiftSrcControl,
         RegB_out,
         RegA_out,
-        SL16_32_out,
+        SL_16_32_out,
         ShiftSrc_out
     );
 
@@ -331,7 +332,7 @@ module cpu(
 
     shift_left_32_ shift_left_32_(
         sign_extend_1_out,
-         hift_left_2_output
+        hift_left_2_output
     );
 
     sign_extended1bit sign_extended1bit(
@@ -346,10 +347,10 @@ module cpu(
         conc_SL26_PC_output
     );
 
-    shift_left_16to32 sshift_left_16to32(
+    shift_left_16to32 shift_left_16to32(
         OFFSET,
 
-        SL_16to32_out
+        SL_16_32_out
     );
 
     unid_controle unid_controle(
