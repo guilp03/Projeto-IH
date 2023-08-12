@@ -311,11 +311,6 @@ module cpu(
         shift_left_2x_out
     );
 
-    shift_left_2x_ shift_left_2x_(
-        OFFSET,
-        shift_left_2x_out
-    );
-
     MDSrcA_ MDSrcA_(
         MDSrcAControl,
         RegA_out,

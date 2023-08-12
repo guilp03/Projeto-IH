@@ -628,6 +628,22 @@ module unid_controle(
                     end
                 end               
 
+                Es_Mfhi, Es_Mflo: begin
+                    RegAControl = 1'b0;
+                    RegBControl = 1'b0;
+                    RegWriteControl = 1'b1;
+                    RegDstControl = 2'b11;
+
+                    if (estado == Es_Mfhi) begin
+                        DataSrcControl = 3'b001;
+                    end
+
+                    else if (estado == Es_Mflo) begin
+                        DataSrcControl = 3'b010;
+                    end
+                    estado = Es_Leitura_1;
+                end       
+
                 Es_And: begin
                     if (contador == 6'b000000) begin
                         estado = Es_And;
