@@ -717,8 +717,8 @@ module unid_controle(
                     if (contador == 6'b000000) begin
                         RegAControl     = 1'b0;
                         RegBControl     = 1'b0;
-                        ShiftSrcControl = 1'b0;
-                        ShiftAmtControl = 2'b10;
+                        ShiftSrcControl = 2'b00;
+                        ShiftAmtControl = 2'b00;
                         ShiftRegControl = 3'b001;
                         
                         estado = Es_Sll;
@@ -727,16 +727,14 @@ module unid_controle(
 
                     else if (contador == 6'b000001) begin
                         ShiftRegControl = 3'b010;
-                        estado = Es_Sll;
                         contador = contador + 1;
                     end
 
                     else if(contador == 6'b000010) begin
-                        RegDstControl   = 3'b110;
-                        DataSrcControl  = 2'b00;
+                        RegDstControl   = 2'b11;
+                        DataSrcControl  = 3'b011;
                         RegWriteControl = 1'b1;
 
-                        estado = Es_Sll;
                         contador = contador + 1;
                     end
                     else if (contador == 6'b000011) begin
@@ -749,32 +747,31 @@ module unid_controle(
                 end
 
                 Es_Srl: begin
-                    if (contador == 6'b000000) begin 
+                    if (contador == 6'b000000) begin
                         RegAControl     = 1'b0;
                         RegBControl     = 1'b0;
-                        ShiftSrcControl = 1'b0;
-                        ShiftAmtControl = 2'b10;
+                        ShiftSrcControl = 2'b00;
+                        ShiftAmtControl = 2'b00;
                         ShiftRegControl = 3'b001;
-
+                        
                         estado = Es_Srl;
                         contador = contador + 1;
                     end
 
-                    else if (contador == 6'b000001) begin 
+                    else if (contador == 6'b000001) begin
                         ShiftRegControl = 3'b011;
-                        estado = Es_Srl;
                         contador = contador + 1;
                     end
 
-                    else if(contador == 6'b000010) begin 
-                        RegDstControl   = 3'b110;
-                        DataSrcControl  = 2'b00;
+                    else if(contador == 6'b000010) begin
+                        RegDstControl   = 2'b11;
+                        DataSrcControl  = 3'b011;
                         RegWriteControl = 1'b1;
 
-                        estado = Es_Srl;
                         contador = contador + 1;
                     end
-                    else if (contador == 6'b000011) begin 
+
+                    else if (contador == 6'b000011) begin
                         estado = Es_Leitura_1;
 
                         RegWriteControl = 1'b0;
@@ -787,26 +784,24 @@ module unid_controle(
                     if (contador == 6'b000000) begin
                         RegAControl     = 1'b0;
                         RegBControl     = 1'b0;
-                        ShiftSrcControl = 1'b0;
-                        ShiftAmtControl = 2'b10;
+                        ShiftSrcControl = 2'b00;
+                        ShiftAmtControl = 2'b00;
                         ShiftRegControl = 3'b001;
-
+                        
                         estado = Es_Sra;
                         contador = contador + 1;
                     end
 
                     else if (contador == 6'b000001) begin
                         ShiftRegControl = 3'b100;
-                        estado = Es_Sra;
                         contador = contador + 1;
                     end
 
-                    else if(contador == 6'b000010) begin 
-                        RegDstControl   = 3'b110;
-                        DataSrcControl  = 2'b00;
+                    else if(contador == 6'b000010) begin
+                        RegDstControl   = 2'b11;
+                        DataSrcControl  = 3'b011;
                         RegWriteControl = 1'b1;
 
-                        estado = Es_Sra;
                         contador = contador + 1;
                     end
                     else if (contador == 6'b000011) begin
@@ -822,26 +817,24 @@ module unid_controle(
                     if (contador == 6'b000000) begin
                         RegAControl     = 1'b0;
                         RegBControl     = 1'b0;
-                        ShiftSrcControl = 1'b1;
-                        ShiftAmtControl = 2'b00;
+                        ShiftSrcControl = 2'b01;
+                        ShiftAmtControl = 2'b10;
                         ShiftRegControl = 3'b001;
-
+                        
                         estado = Es_Sllv;
                         contador = contador + 1;
                     end
 
                     else if (contador == 6'b000001) begin
                         ShiftRegControl = 3'b010;
-                        estado = Es_Sllv;
                         contador = contador + 1;
                     end
 
-                    else if(contador == 6'b000010) begin 
-                        RegDstControl   = 3'b110;
-                        DataSrcControl  = 2'b00;
+                    else if(contador == 6'b000010) begin
+                        RegDstControl   = 2'b11;
+                        DataSrcControl  = 3'b011;
                         RegWriteControl = 1'b1;
 
-                        estado = Es_Sllv;
                         contador = contador + 1;
                     end
                     else if (contador == 6'b000011) begin
@@ -857,26 +850,24 @@ module unid_controle(
                     if (contador == 6'b000000) begin
                         RegAControl     = 1'b0;
                         RegBControl     = 1'b0;
-                        ShiftSrcControl = 1'b1;
-                        ShiftAmtControl = 2'b00;
+                        ShiftSrcControl = 2'b01;
+                        ShiftAmtControl = 2'b10;
                         ShiftRegControl = 3'b001;
-
+                        
                         estado = Es_Srav;
                         contador = contador + 1;
                     end
 
                     else if (contador == 6'b000001) begin
                         ShiftRegControl = 3'b100;
-                        estado = Es_Srav;
                         contador = contador + 1;
                     end
 
-                    else if(contador == 6'b000010) begin 
-                        RegDstControl   = 3'b110;
-                        DataSrcControl  = 2'b00;
+                    else if(contador == 6'b000010) begin
+                        RegDstControl   = 2'b11;
+                        DataSrcControl  = 3'b011;
                         RegWriteControl = 1'b1;
 
-                        estado = Es_Srav;
                         contador = contador + 1;
                     end
                     else if (contador == 6'b000011) begin

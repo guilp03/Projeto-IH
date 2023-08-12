@@ -6,7 +6,7 @@ module ShiftAmt_(
     output reg [4:0] ShiftAmt_out
 );
 
-always @(OFFSET or ConstDezesseis or RegB_out ) begin
+always @(*) begin
     case ( ShiftAmtControl)          
         2'b00: ShiftAmt_out = OFFSET[10:6]; 
         2'b01: ShiftAmt_out = ConstDezesseis; 
