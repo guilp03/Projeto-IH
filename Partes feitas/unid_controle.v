@@ -1077,7 +1077,7 @@ module unid_controle(
                         contador = contador + 1;
                     end
 
-                    else if (contador == 6'b000010) begin
+                    else if (contador == 6'b000010 | contador == 6'b000011 | contador == 6'b000100) begin
                         estado = Es_Addm;
 
                         WriteMemControl = 1'b0;
@@ -1086,32 +1086,32 @@ module unid_controle(
                         contador = contador + 1;
                     end
 
-                    else if (contador == 6'b000011) begin
+                    else if (contador == 6'b000101) begin
                         estado = Es_Addm;
 
                         WriteMDRControl = 1'b0;
-                        ALUOutControl = 1'b1;
 
                         contador = contador + 1;
                     end
 
-                    else if (contador == 6'b000100) begin
+                    else if (contador == 6'b000110) begin
                         estado = Es_Addm;
 
                         ALUSrcAControl = 2'b11;
                         ALUSrcBControl = 2'b10;
                         ALUControl = 3'b001;
-                        ALUOutControl = 1'b0;
+                        ALUOutControl = 1'b1;
 
                         contador = contador + 1;
                     end
 
-                    else if (contador == 6'b000101) begin
+                    else if (contador == 6'b000111) begin
                         estado = Es_Addm;
 
                         DataSrcControl = 3'b110;
                         RegDstControl = 2'b01;
                         RegWriteControl = 1'b1;
+                        ALUOutControl = 1'b0;
 
                         contador = contador + 1;
                     end
