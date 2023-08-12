@@ -47,7 +47,11 @@
 package ram_constants is
 	constant DATA_WIDTH : INTEGER := 8;
 	constant ADDR_WIDTH : INTEGER := 8;
+<<<<<<< Updated upstream
 	constant INIT_FILE  : STRING  := "C:\Users\Pichau\OneDrive\Documentos\Projeto-IH-3\Projeto-IH\Partes dadas\Componentes do Projeto\instrucoes.mif";
+=======
+	constant INIT_FILE  : STRING  := "C:\Users\eduar\OneDrive\Documentos\GitHub\Projeto-IH\Partes dadas\Componentes do Projeto\instrucoes.mif";
+>>>>>>> Stashed changes
 end ram_constants;
 
 --*************************************************************************

@@ -141,12 +141,13 @@ module unid_controle(
 
     initial begin
         reset_out = 1'b1;
+        contador = 6'b000000;
     end
     
     //Código
     always @(posedge clock) begin
         if (reset == 1'b1) begin
-            if (estado != Es_Reset) begin
+            if (contador == 6'b000000) begin
                 estado = Es_Reset;
 
                 WriteMemControl = 1'b0;
@@ -181,10 +182,8 @@ module unid_controle(
             else begin
                 estado = Es_Leitura_1;
 
-                DataSrcControl = 3'b000; ///
                 reset_out = 1'b0; ///
-                RegDstControl = 2'b00; ///
-                RegWriteControl = 1'b0; ///
+                RegWriteControl = 1'b1; ///
 
                 reset_out = 1'b0;
 
@@ -195,6 +194,7 @@ module unid_controle(
         else begin
             case (estado)
                 Es_Leitura_1: begin 
+                    RegWriteControl = 1'b1;
                     IorDControl = 3'b000;                
                     WriteMemControl = 1'b0; 
                     ALUSrcAControl = 2'b01; 
@@ -627,22 +627,6 @@ module unid_controle(
                         estado = Es_Leitura_1;
                     end
                 end               
-
-                Es_Mfhi, Es_Mflo: begin
-                    RegAControl = 1'b0;
-                    RegBControl = 1'b0;
-                    RegWriteControl = 1'b1;
-                    RegDstControl = 2'b11;
-
-                    if (estado == Es_Mfhi) begin
-                        DataSrcControl = 3'b001;
-                    end
-
-                    else if (estado == Es_Mflo) begin
-                        DataSrcControl = 3'b010;
-                    end
-                    estado = Es_Leitura_1;
-                end       
 
                 Es_And: begin
                     if (contador == 6'b000000) begin
