@@ -38,6 +38,8 @@ module cpu(
     wire [1:0] ALUSrcBControl; //n
     wire [1:0] SSControl;
     wire [1:0] LScontrol;
+    wire MDSrcAControl;
+    wire MDSrcBControl;
 
 // Fios de dados
 
@@ -50,13 +52,13 @@ module cpu(
     assign ConstNo_Opcode = 32'b00000000000000000000000011111101;
     wire [31:0] ConstQuatro;
     assign ConstQuatro = 32'b00000000000000000000000000000100;
-    wire [31:0] ConstVinte_nove = 32'b00000000000000000000000000011101;
+    wire [31:0] ConstVinte_nove;
     assign ConstVinte_nove = 32'b00000000000000000000000000011101;
-    wire [31:0] ConstTrinta_um = 32'b00000000000000000000000000011111;
+    wire [31:0] ConstTrinta_um;
     assign ConstTrinta_um = 32'b00000000000000000000000000011111;
-    wire [31:0] ConstDuzentos_vinte_sete = 32'b00000000000000000000000011100011;
+    wire [31:0] ConstDuzentos_vinte_sete;
     assign ConstDuzentos_vinte_sete = 32'b00000000000000000000000011100011;
-    wire [31:0] ConstDezesseis = 32'b00000000000000000000000000001000;
+    wire [31:0] ConstDezesseis;
     assign ConstDezesseis = 32'b00000000000000000000000000001000;
 
     wire [31:26] OPCODE;
@@ -89,6 +91,11 @@ module cpu(
     wire [31:0] SS_out;
     wire [31:0] LS_out;
     wire [31:0] sign_extended16_32_out;
+    wire [31:0] shift_left8_32_exce_out;
+    wire [31:0] MDSrcA_out;
+    wire [31:0] MDSrcB_out;
+    wire [31:0] shift_left_26to32_jump_out;
+    wire [31:0] sign_extended1_32_out;
     wire [31:0] shift_left_16to32_out;
     wire [31:0] shift_left_2x_out;
 
@@ -219,14 +226,14 @@ module cpu(
     EX_ EX_(
         EX_control,
         PCSource_out,
-        Mem_out,
+        shift_left8_32_exce_out,
         EX_out
     );
 
     PcSource_ PcSource_(
         PcSourceControl,
+        shift_left_26to32_jump_out,
         ALUresult,
-        conc_SL26_PC_out,
         ALUOut_out,
         EPC_out,
         PCSource_out
@@ -276,7 +283,7 @@ module cpu(
         LO_out,
         ShiftReg_out,
         ConstDuzentos_vinte_sete,
-        SE1_32_out,
+        sign_extended1_32_out,
         ALUOut_out,
         DataSrc_out
     );
@@ -304,37 +311,39 @@ module cpu(
         shift_left_2x_out
     );
 
-    // MDSrcA_ MDSrcA_(
-    //     MDSrcAControl,
-    //     RegA_out,
-    //     MDR_out,
-    //     MDSrcA_out
-    // );
+    shift_left_2x_ shift_left_2x_(
+        OFFSET,
+        shift_left_2x_out
+    );
 
-    // MDSrcB_ MDSrcB_(
-    //     MDSrcBControl,
-    //     RegB_out,
-    //     Mem_out,
-    //     MDSrcB_out
-    // );
+    MDSrcA_ MDSrcA_(
+        MDSrcAControl,
+        RegA_out,
+        MDR_out,
+        MDSrcA_out
+    );
 
-    // Componentes    
-    // StoreSize SS_(
-    //     SSControl,
-    //     RegB_out,
-    //     MDR_out,
-    //     SS_out
-    // );
+    MDSrcB_ MDSrcB_(
+        MDSrcBControl,
+        RegB_out,
+        Mem_out,
+        MDSrcB_out
+    );
 
-    // LoadSize LS_(
-    //     LScontrol,
-    //     MDR_out,
-    //     LS_out
-    // );
+     LoadSize LoadSize(
+        LScontrol,
+        MDR_out,
+        LS_out
+    );
 
     sign_extended16_32_ sign_extended16_32_(
         OFFSET,
         sign_extended16_32_out
+    );
+
+    shift_left8_32_exce_ shift_left8_32_exce_(
+        Mem_out,
+        shift_left8_32_exce_out
     );
 
     // shift_left_32_ shift_left_32_(
@@ -342,23 +351,24 @@ module cpu(
     //     shift_left_2_output
     // );
 
-    // sign_extended1bit sign_extended1bit(
-    //     OFFSET,
-    //     sign_extend_1_out
-    // );
+    sign_extended1_32_ sign_extended1_32_(
+        LT,
+        sign_extended1_32_out
+    );
 
-    // shift_left_26to28 shift_left_26to28(
-        
-    //     PC_output,
+    shift_left_26to32_jump_ shift_left_26to32_jump_(
+        RS,
+        RT,
+        OFFSET,
+        PC_out,
+        shift_left_26to32_jump_out
+    );
 
-    //     conc_SL26_PC_output
-    // );
+    shift_left_16to32 sshift_left_16to32(
+        OFFSET,
 
-    // shift_left_16to32 sshift_left_16to32(
-    //     OFFSET,
-
-    //     SL_16to32_out
-    // );
+        SL_16to32_out
+    );
 
     unid_controle unid_controle(
         clock,
