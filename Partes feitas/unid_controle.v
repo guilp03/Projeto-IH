@@ -713,6 +713,181 @@ module unid_controle(
                     end
                 end
 
+                Es_Sll: begin
+                    if (contador == 6'b000000) begin
+                        RegAControl     = 1'b0;
+                        RegBControl     = 1'b0;
+                        ShiftSrcControl = 1'b0;
+                        ShiftAmtControl = 2'b10;
+                        ShiftRegControl = 3'b001;
+                        
+                        estado = Es_Sll;
+                        contador = contador + 1;
+                    end
+
+                    else if (contador == 6'b000001) begin
+                        ShiftRegControl = 3'b010;
+                        estado = Es_Sll;
+                        contador = contador + 1;
+                    end
+
+                    else if(contador == 6'b000010) begin
+                        RegDstControl   = 3'b110;
+                        DataSrcControl  = 2'b00;
+                        RegWriteControl = 1'b1;
+
+                        estado = Es_Sll;
+                        contador = contador + 1;
+                    end
+                    else if (contador == 6'b000011) begin
+                        estado = Es_Leitura_1;
+
+                        RegWriteControl = 1'b0;
+
+                        contador = 6'b000000;
+                    end
+                end
+
+                Es_Srl: begin
+                    if (contador == 6'b000000) begin 
+                        RegAControl     = 1'b0;
+                        RegBControl     = 1'b0;
+                        ShiftSrcControl = 1'b0;
+                        ShiftAmtControl = 2'b10;
+                        ShiftRegControl = 3'b001;
+
+                        estado = Es_Srl;
+                        contador = contador + 1;
+                    end
+
+                    else if (contador == 6'b000001) begin 
+                        ShiftRegControl = 3'b011;
+                        estado = Es_Srl;
+                        contador = contador + 1;
+                    end
+
+                    else if(contador == 6'b000010) begin 
+                        RegDstControl   = 3'b110;
+                        DataSrcControl  = 2'b00;
+                        RegWriteControl = 1'b1;
+
+                        estado = Es_Srl;
+                        contador = contador + 1;
+                    end
+                    else if (contador == 6'b000011) begin 
+                        estado = Es_Leitura_1;
+
+                        RegWriteControl = 1'b0;
+
+                        contador = 6'b000000;
+                    end
+                end
+
+                Es_Sra: begin
+                    if (contador == 6'b000000) begin
+                        RegAControl     = 1'b0;
+                        RegBControl     = 1'b0;
+                        ShiftSrcControl = 1'b0;
+                        ShiftAmtControl = 2'b10;
+                        ShiftRegControl = 3'b001;
+
+                        estado = Es_Sra;
+                        contador = contador + 1;
+                    end
+
+                    else if (contador == 6'b000001) begin
+                        ShiftRegControl = 3'b100;
+                        estado = Es_Sra;
+                        contador = contador + 1;
+                    end
+
+                    else if(contador == 6'b000010) begin 
+                        RegDstControl   = 3'b110;
+                        DataSrcControl  = 2'b00;
+                        RegWriteControl = 1'b1;
+
+                        estado = Es_Sra;
+                        contador = contador + 1;
+                    end
+                    else if (contador == 6'b000011) begin
+                        estado = Es_Leitura_1;
+
+                        RegWriteControl = 1'b0;
+
+                        contador = 6'b000000;
+                    end
+                end
+
+                Es_Sllv: begin
+                    if (contador == 6'b000000) begin
+                        RegAControl     = 1'b0;
+                        RegBControl     = 1'b0;
+                        ShiftSrcControl = 1'b1;
+                        ShiftAmtControl = 2'b00;
+                        ShiftRegControl = 3'b001;
+
+                        estado = Es_Sllv;
+                        contador = contador + 1;
+                    end
+
+                    else if (contador == 6'b000001) begin
+                        ShiftRegControl = 3'b010;
+                        estado = Es_Sllv;
+                        contador = contador + 1;
+                    end
+
+                    else if(contador == 6'b000010) begin 
+                        RegDstControl   = 3'b110;
+                        DataSrcControl  = 2'b00;
+                        RegWriteControl = 1'b1;
+
+                        estado = Es_Sllv;
+                        contador = contador + 1;
+                    end
+                    else if (contador == 6'b000011) begin
+                        estado = Es_Leitura_1;
+
+                        RegWriteControl = 1'b0;
+
+                        contador = 6'b000000;
+                    end
+                end
+
+                Es_Srav: begin
+                    if (contador == 6'b000000) begin
+                        RegAControl     = 1'b0;
+                        RegBControl     = 1'b0;
+                        ShiftSrcControl = 1'b1;
+                        ShiftAmtControl = 2'b00;
+                        ShiftRegControl = 3'b001;
+
+                        estado = Es_Srav;
+                        contador = contador + 1;
+                    end
+
+                    else if (contador == 6'b000001) begin
+                        ShiftRegControl = 3'b100;
+                        estado = Es_Srav;
+                        contador = contador + 1;
+                    end
+
+                    else if(contador == 6'b000010) begin 
+                        RegDstControl   = 3'b110;
+                        DataSrcControl  = 2'b00;
+                        RegWriteControl = 1'b1;
+
+                        estado = Es_Srav;
+                        contador = contador + 1;
+                    end
+                    else if (contador == 6'b000011) begin
+                        estado = Es_Leitura_1;
+
+                        RegWriteControl = 1'b0;
+
+                        contador = 6'b000000;
+                    end
+                end
+
                 Es_Slt: begin
                     if (contador == 6'b000000) begin 
                         ALUSrcAControl = 2'b10;

@@ -47,7 +47,7 @@
 package ram_constants is
 	constant DATA_WIDTH : INTEGER := 8;
 	constant ADDR_WIDTH : INTEGER := 8;
-	constant INIT_FILE  : STRING  := "C:\Users\guilp\OneDrive\Documentos\GitHub\Projeto-IH\Partes dadas\Componentes do Projeto\instrucoes.mif";
+	constant INIT_FILE  : STRING  := "C:\Users\Vitor\OneDrive\Documentos\GitHub\Projeto-IH\Partes dadas\Componentes do Projeto\shifts.mif";
 end ram_constants;
 
 --*************************************************************************
