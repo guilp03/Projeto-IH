@@ -196,7 +196,7 @@ module unid_controle(
         else begin
             case (estado)
                 Es_Leitura_1: begin 
-                    RegWriteControl = 1'b1;
+                    RegWriteControl = 1'b0;
                     IorDControl = 3'b000;                
                     WriteMemControl = 1'b0; 
                     ALUSrcAControl = 2'b01; 
