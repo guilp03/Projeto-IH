@@ -1324,6 +1324,32 @@ module unid_controle(
 
                         contador = 6'b000000;    
                     end
+                end
+                Es_Mult:begin
+                    if(contador == 6'b000000)begin
+                        estado = Es_Mult;
+                        RegAControl = 1'b0;
+                        RegBControl = 1'b0;
+                        MDSrcAControl = 1'b0;
+                        MDSrcBControl = 1'b0;
+                        MDControl = 1'b0;
+                        
+                        contador = contador + 1;
+                    end
+                    else if(contador <= 6'b011111)begin
+                        contador = contador + 1;
+                    end
+                    else if(contador == 6'b100000)begin
+                        HI_writeControl = 1'b1;
+                        LO_writeControl = 1'b1;
+                        contador = contador + 1;
+                    end
+                    else if(contador == 6'b100001)begin
+                        HI_writeControl = 1'b0;
+                        LO_writeControl = 1'b0;
+                        contador = 6'b000000;
+                        estado = Es_Leitura_1;
+                    end
                 end                      
                 //                 contador = 6'b000000;
                 //                 end

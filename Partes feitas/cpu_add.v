@@ -374,6 +374,16 @@ module cpu(
         SL_16_32_out
     );
 
+    multidivBasicVersion multidivBasicVersion(
+        MDControl,
+        reset,
+        clock,
+
+        HI_out,
+        LO_out,
+        flag
+    );
+
     unid_controle unid_controle(
         clock,
         reset,
